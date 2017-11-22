@@ -1,6 +1,6 @@
 module Unimatrix::Distributor
 
-  class Activity < Base
+  class ActivityReference < Base
     field    :id
     field    :type_name
     field    :subject_id

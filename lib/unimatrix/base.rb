@@ -1,4 +1,4 @@
-module Unimatrix::Distributor
+module Unimatrix
 
   class Base
 
@@ -52,7 +52,7 @@ module Unimatrix::Distributor
     has_many  :errors
 
     def initialize( attributes={}, associations={} )
-      self.type_name = self.class.name.gsub( /Unimatrix::Distributor::/, '' ).underscore
+      self.type_name = self.class.name.gsub( /Unimatrix::Distributor/, '' ).underscore
 
       attributes.each do | key, value |
         if !respond_to?( "#{ key }=" )

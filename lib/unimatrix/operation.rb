@@ -1,4 +1,4 @@
-module Unimatrix::Distributor
+module Unimatrix
 
   class Operation
 
@@ -90,7 +90,7 @@ module Unimatrix::Distributor
     def write( node, objects, &block )
       result = nil
       Request.new.tap do | request |
-        serializer = Unimatrix::Distributor::Serializer.new( objects )
+        serializer = Unimatrix::Serializer.new( objects )
         response = request.post( @path, @parameters, serializer.serialize( node ) )
         if response.present?
           result = response.resources

@@ -1,4 +1,4 @@
-module Unimatrix::Distributor
+module Unimatrix
 
   class Parser
 
@@ -60,7 +60,7 @@ module Unimatrix::Distributor
 
       if attributes.present?
         class_name = name.singularize.camelize
-        object_class = Unimatrix::Distributor.const_get( class_name ) rescue nil
+        object_class = Unimatrix.const_get( class_name ) rescue nil
 
         if object_class.present?
           relations = name == self.name ?
@@ -80,7 +80,7 @@ module Unimatrix::Distributor
       @resources_index[ name ][ key ] ||= begin
 
         # lock the resource index for this name/key combination
-        # note: this prevents Unimatrix::Distributor objects that are associated with
+        # note: this prevents Unimatrix objects that are associated with
         #       themselves from causing a stack overflow
         return nil if @resource_index_mutex[ name ].include?( key )
         @resource_index_mutex[ name ].push( key )
@@ -89,15 +89,15 @@ module Unimatrix::Distributor
         resource_attributes = resource_attribute_index[ name ][ key ]
         if resource_attributes.present?
           type_name = resource_attributes[ 'type_name' ].camelize
-          klass = ( Unimatrix::Distributor.const_get( options[ 'type_name' ].camelize ) rescue nil )
+          klass = ( Unimatrix.const_get( options[ 'type_name' ].camelize ) rescue nil )
 
           #Create specific class if not already defined
-          if type_name.present? && !Unimatrix::Distributor.const_defined?( type_name )
+          if type_name.present? && !Unimatrix.const_defined?( type_name )
             typed_klass = Class.new( klass )
-            klass = Unimatrix::Distributor.const_set( type_name , typed_klass )
+            klass = Unimatrix.const_set( type_name , typed_klass )
 
-          elsif Unimatrix::Distributor.const_defined?( type_name )
-            klass = Unimatrix::Distributor.const_get( type_name )
+          elsif Unimatrix.const_defined?( type_name )
+            klass = Unimatrix.const_get( type_name )
 
           end
 

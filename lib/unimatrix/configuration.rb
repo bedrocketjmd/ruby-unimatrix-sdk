@@ -1,6 +1,6 @@
 require 'singleton'
 
-module Unimatrix::Distributor
+module Unimatrix
 
   def self.configuration( &block )
     Configuration.instance().instance_eval( &block ) unless block.nil?

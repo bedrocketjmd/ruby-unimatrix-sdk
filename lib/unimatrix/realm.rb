@@ -1,4 +1,4 @@
-module Unimatrix::Distributor
+module Unimatrix
 
   class Realm < Base
     field :uuid

@@ -1,12 +1,12 @@
 require 'net/http'
 require 'addressable/uri'
 
-module Unimatrix::Distributor
+module Unimatrix
 
   class Request
 
     def initialize( default_parameters = {} )
-      uri   = URI( Unimatrix::Distributor.configuration.url )
+      uri   = URI( Unimatrix.configuration.url )
       @http = Net::HTTP.new( uri.host, uri.port )
 
       @http.use_ssl = ( uri.scheme == 'https' )
