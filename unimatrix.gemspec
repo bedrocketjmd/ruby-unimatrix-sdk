@@ -5,7 +5,7 @@ require 'unimatrix/version'
 
 Gem::Specification.new do | spec |
   spec.name          = "unimatrix"
-  spec.version       = Unimatrix::VERSION
+  spec.version       = Unimatrix::Distributor::VERSION
   spec.homepage      = "http://sportsrocket.com"
   spec.authors       = [ "Matthew Yang" ]
   spec.email         = [ "matthewyang@sportsrocket.com" ]
