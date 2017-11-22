@@ -1,6 +1,6 @@
 module Unimatrix::Distributor
 
-  class Destination < Base
+  class Destination < Resource
     field    :id
     field    :uuid
     field    :realm_uuid

@@ -13,8 +13,8 @@ module Unimatrix
         node_object = {}
         node_object[ :type_name ] = (
           object.respond_to?( :type_name ) ?
-            object.type_name :
-            object.class.name.gsub( /Unimatrix::Distributor/, '' ).underscore
+            object.type_name : 
+            object.class.name.split( '::' ).last.underscore
         )
         if object.respond_to?( :fields )
           object.fields.each do | name, options |

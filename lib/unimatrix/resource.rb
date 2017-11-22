@@ -1,11 +1,25 @@
 module Unimatrix
 
-  class Base
+  class Resource
 
     class << self
 
       def inherited( subclass )
         subclass.fields = {}.merge( self.fields )
+      end
+
+      def type_name
+        name.split( '::' ).last.underscore
+      end
+
+      def find_by_type_name( type_name )
+        @descendants_by_type_name = begin
+          result = {}
+          descendants.each do | descendant |
+            result[ descendant.type_name ] = descendant
+          end
+        end
+        @descendants[ type_name ]
       end
 
       def field( name, options = {} )
@@ -52,7 +66,8 @@ module Unimatrix
     has_many  :errors
 
     def initialize( attributes={}, associations={} )
-      self.type_name = self.class.name.gsub( /Unimatrix::Distributor/, '' ).underscore
+
+      self.type_name = self.class.name.split( '::' ).last.underscore
 
       attributes.each do | key, value |
         if !respond_to?( "#{ key }=" )

@@ -1,6 +1,6 @@
 module Unimatrix
 
-  class Error < Base
+  class Error < Resource
     field :code
     field :message
   end

@@ -26,7 +26,7 @@ module Unimatrix
       )
     end
 
-    field :url,              default: ENV[ 'DISTRIBUTOR_URL' ]
+    field :url,              default: ENV[ 'UNIMATRIX_API_URL' ]
   end
 
 end

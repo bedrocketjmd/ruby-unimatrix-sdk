@@ -1,6 +1,6 @@
 module Unimatrix::Activist
 
-  class Task < Base
+  class Task < Resource
     field   :id
     field   :type_name
     field   :subject_id

@@ -88,18 +88,8 @@ module Unimatrix
         result = nil
         resource_attributes = resource_attribute_index[ name ][ key ]
         if resource_attributes.present?
-          type_name = resource_attributes[ 'type_name' ].camelize
-          klass = ( Unimatrix.const_get( options[ 'type_name' ].camelize ) rescue nil )
-
-          #Create specific class if not already defined
-          if type_name.present? && !Unimatrix.const_defined?( type_name )
-            typed_klass = Class.new( klass )
-            klass = Unimatrix.const_set( type_name , typed_klass )
-
-          elsif Unimatrix.const_defined?( type_name )
-            klass = Unimatrix.const_get( type_name )
-
-          end
+          type_name = resource_attributes[ 'type_name' ]
+          klass = Resource.find_by_type_name( Unimatrix.const_get( options[ 'type_name' ] ) rescue nil )
 
           if klass.present?
             result = klass.new(
