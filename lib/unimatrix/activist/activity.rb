@@ -3,6 +3,7 @@ module Unimatrix::Activist
   class Activity < Unimatrix::Resource
     field    :id
     field    :type_name
+    field    :artifact_id
     field    :subject_id
     field    :subject_type
     field    :state
