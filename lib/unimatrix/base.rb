@@ -18,8 +18,9 @@ module Unimatrix
           descendants.each do | descendant |
             result[ descendant.type_name ] = descendant
           end
+          result
         end
-        @descendants[ type_name ]
+        @descendants_by_type_name[ type_name ]
       end
 
       def field( name, options = {} )

@@ -59,8 +59,7 @@ module Unimatrix
       resource = nil
 
       if attributes.present?
-        class_name = name.singularize.camelize
-        object_class = Unimatrix.const_get( class_name ) rescue nil
+        object_class = Resource.find_by_type_name( name ) rescue nil
 
         if object_class.present?
           relations = name == self.name ?
@@ -88,8 +87,9 @@ module Unimatrix
         result = nil
         resource_attributes = resource_attribute_index[ name ][ key ]
         if resource_attributes.present?
-          type_name = resource_attributes[ 'type_name' ]
-          klass = Resource.find_by_type_name( Unimatrix.const_get( options[ 'type_name' ] ) ) rescue nil
+          type_name = resource_attributes[ 'type_name' ] || options[ 'type_name' ]
+
+          klass = Resource.find_by_type_name( type_name ) rescue nil
 
           if klass.present?
             result = klass.new(
