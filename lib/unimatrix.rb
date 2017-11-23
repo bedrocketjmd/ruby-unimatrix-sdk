@@ -11,7 +11,7 @@ require 'unimatrix/parser'
 require 'unimatrix/request'
 require 'unimatrix/response'
 require 'unimatrix/serializer'
-require 'unimatrix/resource'
+require 'unimatrix/base'
 
 #Shared Errors
 require 'unimatrix/error'

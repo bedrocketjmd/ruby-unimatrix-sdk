@@ -1,6 +1,6 @@
 module Unimatrix
 
-  class Realm < Base
+  class Realm < Resource
     field :uuid
   end
 

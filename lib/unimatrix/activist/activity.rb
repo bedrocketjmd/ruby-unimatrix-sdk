@@ -1,6 +1,6 @@
 module Unimatrix::Activist
 
-  class Activity < Resource
+  class Activity < Unimatrix::Resource
     field    :id
     field    :type_name
     field    :subject_id
