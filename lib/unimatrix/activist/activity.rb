@@ -7,6 +7,7 @@ module Unimatrix::Activist
     field    :subject_id
     field    :subject_type
     field    :state
+    field    :uuid
     field    :message
     field    :properties
     field    :completed_at

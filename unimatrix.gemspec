@@ -4,7 +4,7 @@ $LOAD_PATH.unshift( lib ) unless $LOAD_PATH.include?( lib )
 require 'unimatrix/version'
 
 Gem::Specification.new do | spec |
-  spec.name          = "ruby-unimatrix-sdk"
+  spec.name          = "unimatrix"
   spec.version       = Unimatrix::VERSION
   spec.homepage      = "http://sportsrocket.com"
   spec.authors       = [ "Matthew Yang" ]
