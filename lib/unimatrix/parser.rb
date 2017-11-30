@@ -88,8 +88,12 @@ module Unimatrix
         resource_attributes = resource_attribute_index[ name ][ key ]
         if resource_attributes.present?
           type_name = resource_attributes[ 'type_name' ] || options[ 'type_name' ]
-
           klass = Resource.find_by_type_name( type_name ) rescue nil
+
+          if klass.nil?
+            typed_klass = Class.new( klass )
+            klass = Unimatrix.const_set( type_name, typed_klass )
+          end
 
           if klass.present?
             result = klass.new(
