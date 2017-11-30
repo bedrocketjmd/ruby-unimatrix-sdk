@@ -90,17 +90,23 @@ module Unimatrix
           type_name = resource_attributes[ 'type_name' ] || options[ 'type_name' ]
           klass = Resource.find_by_type_name( type_name ) rescue nil
 
-          binding.pry
-
           if klass.nil?
-            klass = Object.const_set( type_name.camelize, klass )
+            # determining which api the request coming from to assemble the appropriate Unimatrix::<subclass>
+            
+            if options[ 'type_name' ] == 'task' ||
+               options[ 'type_name' ] == 'activity'
+
+               klass = ( Unimatrix::Activist.const_get( options[ 'type_name' ].camelize ) rescue nil )
+               typed_klass = Class.new( klass )
+               klass = Unimatrix::Activist.const_set( type_name.camelize, typed_klass )
+            end
           end
 
           if klass.present?
-            result = klass.new(
-              resource_attributes,
-              self.resource_associations_by( name, key )
-            )
+             result = klass.new(
+               resource_attributes,
+               self.resource_associations_by( name, key )
+             )
           end
         end
 
