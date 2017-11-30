@@ -90,9 +90,10 @@ module Unimatrix
           type_name = resource_attributes[ 'type_name' ] || options[ 'type_name' ]
           klass = Resource.find_by_type_name( type_name ) rescue nil
 
+          binding.pry
+
           if klass.nil?
-            typed_klass = Class.new( klass )
-            klass = Unimatrix.const_set( type_name, typed_klass )
+            klass = Object.const_set( type_name.camelize, klass )
           end
 
           if klass.present?
