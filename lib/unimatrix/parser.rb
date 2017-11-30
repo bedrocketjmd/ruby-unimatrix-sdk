@@ -92,13 +92,19 @@ module Unimatrix
 
           if klass.nil?
             # determining which api the request coming from to assemble the appropriate Unimatrix::<subclass>
-            
             if options[ 'type_name' ] == 'task' ||
                options[ 'type_name' ] == 'activity'
 
                klass = ( Unimatrix::Activist.const_get( options[ 'type_name' ].camelize ) rescue nil )
                typed_klass = Class.new( klass )
                klass = Unimatrix::Activist.const_set( type_name.camelize, typed_klass )
+
+            elsif options[ 'type_name' ] == 'distribution' ||
+               options[ 'type_name' ] == 'destination'
+
+               klass = ( Unimatrix::Distributor.const_get( options[ 'type_name' ].camelize ) rescue nil )
+               typed_klass = Class.new( klass )
+               klass = Unimatrix::Distributor.const_set( type_name.camelize, typed_klass )
             end
           end
 
