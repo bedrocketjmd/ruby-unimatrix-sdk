@@ -59,7 +59,7 @@ module Unimatrix
       resource = nil
 
       if attributes.present?
-        object_class = Resource.find_by_type_name( name ) rescue nil
+        object_class = Resource.find_by_type_name( name.singularize ) rescue nil
 
         if object_class.present?
           relations = name == self.name ?
@@ -88,7 +88,7 @@ module Unimatrix
         resource_attributes = resource_attribute_index[ name ][ key ]
         if resource_attributes.present?
           type_name = resource_attributes[ 'type_name' ] || options[ 'type_name' ]
-          klass = Resource.find_by_type_name( type_name ) rescue nil
+          klass = Resource.find_by_type_name( name.singularize ) rescue nil
 
           if klass.nil?
             # determining which api the request coming from to assemble the appropriate Unimatrix::<subclass>
