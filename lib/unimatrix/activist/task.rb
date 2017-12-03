@@ -1,6 +1,7 @@
 module Unimatrix::Activist
 
-  class Task < Unimatrix::Resource
+  class Task < Unimatrix::DynamicResource
+
     field   :id
     field   :type_name
     field   :subject_id
@@ -16,6 +17,7 @@ module Unimatrix::Activist
     field   :updated_at
 
     has_one :activity
+    
   end
 
 end

@@ -1,6 +1,7 @@
 module Unimatrix::Activist
 
-  class Activity < Unimatrix::Resource
+  class Activity < Unimatrix::DynamicResource
+
     field    :id
     field    :type_name
     field    :artifact_id
@@ -20,6 +21,7 @@ module Unimatrix::Activist
 
     has_many :tasks
     has_one  :realm
+
   end
 
 end
