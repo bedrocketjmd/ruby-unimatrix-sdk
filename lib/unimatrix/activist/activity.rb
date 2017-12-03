@@ -15,6 +15,7 @@ module Unimatrix::Activist
     field    :created_at
     field    :updated_at
     field    :execute_at
+    field    :expire_at
     field    :activities_schedule_id
 
     has_many :tasks
