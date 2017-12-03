@@ -9,14 +9,16 @@ module Unimatrix
       end
 
       def type_name
-        name.split( '::' ).last.underscore
+        name.present? ? name.split( '::' ).last.underscore : nil
       end
 
       def find_by_type_name( type_name )
         @descendants_by_type_name = begin
           result = {}
           descendants.each do | descendant |
-            result[ descendant.type_name ] = descendant
+            descendant_type_name = descendant.type_name
+            result[ descendant_type_name ] = descendant \
+              unless descendant_type_name.blank?
           end
           result
         end
@@ -71,11 +73,7 @@ module Unimatrix
       self.type_name = self.class.name.split( '::' ).last.underscore
 
       attributes.each do | key, value |
-        if !respond_to?( "#{ key }=" )
-          field( key )
-        end
-
-        send( "#{ key }=", value )
+        send( "#{ key }=", value ) if self.respond_to?( "#{ key }=" )
       end
 
       associations.each do | key, value |
@@ -83,26 +81,7 @@ module Unimatrix
       end
 
       yield self if block_given?
-    end
-
-    def field( name, options = {} )
-      self.fields[ name.to_sym ] = options.merge( name: name )
-
-      class_eval(
-        "def #{ name }(); " +
-        "@#{ name }.is_a?( FalseClass ) ? @#{ name } : (" +
-           "@#{ name } || " +
-             ( options[ :default ].nil? ?
-                "nil" :
-                ( options[ :default ].is_a?( String ) ?
-                    "'#{ options[ :default ] }'" :
-                      "#{ options[ :default ] }" ) ) + ");" +
-        "end;" +
-        " " +
-        "attr_writer :#{ name };",
-        __FILE__,
-        __LINE__
-      )
+    
     end
 
   end

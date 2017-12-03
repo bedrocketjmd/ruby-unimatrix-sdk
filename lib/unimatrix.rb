@@ -4,30 +4,31 @@ require 'fnv'
 
 require 'unimatrix/version'
 
-#Shared Operations
 require 'unimatrix/configuration'
 require 'unimatrix/operation'
 require 'unimatrix/parser'
 require 'unimatrix/request'
 require 'unimatrix/response'
 require 'unimatrix/serializer'
-require 'unimatrix/base'
 
-#Shared Errors
+require 'unimatrix/resource'
+require 'unimatrix/dynamic_resource'
+require 'unimatrix/realm'
+
 require 'unimatrix/error'
 require 'unimatrix/attribute_error'
 require 'unimatrix/bad_request_error'
 
-#Shared Models
-require 'unimatrix/base'
-require 'unimatrix/realm'
+# errors 
+require 'unimatrix/error'
+require 'unimatrix/attribute_error'
+require 'unimatrix/bad_request_error'
 
-#Specific Models
-#Distributor
-require 'unimatrix/distributor/activity_reference'
+# activist
+require 'unimatrix/activist/task'
+require 'unimatrix/activist/activity'
+
+# distributor
 require 'unimatrix/distributor/destination'
 require 'unimatrix/distributor/distribution'
 
-#Activist
-require 'unimatrix/activist/task'
-require 'unimatrix/activist/activity'
