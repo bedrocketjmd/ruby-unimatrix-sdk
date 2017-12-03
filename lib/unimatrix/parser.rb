@@ -47,28 +47,37 @@ module Unimatrix
     end
 
     def parse_resource( name, attributes )
+      
       @resources_mutex ||= Hash.new { | hash, key | hash[ key ] = [] }
-      object_key = attributes[ key ]
+      resource_key = attributes[ key ]
 
       # Lock the resource index for this name/key combination
       # This prevents objects that are associated with
       # themselves from causing a stack overflow
-      return nil if @resources_mutex[ name ].include?( object_key )
+      return nil if @resources_mutex[ name ].include?( resource_key )
+      @resources_mutex[ name ].push( resource_key )
 
-      @resources_mutex[ name ].push( object_key )
       resource = nil
 
       if attributes.present?
-        object_class = Resource.find_by_type_name( name.singularize ) rescue nil
+        
+        resource_type_name = attributes[ :type_name ] || self.type_name
+        resource_class = 
+          Resource.find_by_type_name( resource_type_name ) ||
+          Resource.find_by_type_name( self.type_name )
 
-        if object_class.present?
+        if resource_class.present?
           relations = name == self.name ?
-                        self.parse_associations( attributes ) : []
-          resource = object_class.new( attributes, relations )
+            self.parse_associations( attributes ) : []
+          resource = resource_class.new( attributes, relations )
         end
-        @resources_mutex[ name ].delete( object_key )
+
       end
+
+      @resources_mutex[ name ].delete( object_key )
+
       resource
+    
     end
 
     def resource_by( name, key, options = {} )
@@ -86,34 +95,21 @@ module Unimatrix
 
         result = nil
         resource_attributes = resource_attribute_index[ name ][ key ]
+        
         if resource_attributes.present?
-          type_name = resource_attributes[ 'type_name' ] || options[ 'type_name' ]
-          klass = Resource.find_by_type_name( name.singularize ) rescue nil
+          
+          resource_type_name = options[ 'type_name' ] || 
+                               resource_attributes[ 'type_name' ] 
+          
+          resource_class = Resource.find_by_type_name( resource_type_name ) 
 
-          if klass.nil?
-            # determining which api the request coming from to assemble the appropriate Unimatrix::<subclass>
-            if options[ 'type_name' ] == 'task' ||
-               options[ 'type_name' ] == 'activity'
-
-               klass = ( Unimatrix::Activist.const_get( options[ 'type_name' ].camelize ) rescue nil )
-               typed_klass = Class.new( klass )
-               klass = Unimatrix::Activist.const_set( type_name.camelize, typed_klass )
-
-            elsif options[ 'type_name' ] == 'distribution' ||
-               options[ 'type_name' ] == 'destination'
-
-               klass = ( Unimatrix::Distributor.const_get( options[ 'type_name' ].camelize ) rescue nil )
-               typed_klass = Class.new( klass )
-               klass = Unimatrix::Distributor.const_set( type_name.camelize, typed_klass )
-            end
-          end
-
-          if klass.present?
-             result = klass.new(
+          if resource_class.present?
+             result = resource_class.new(
                resource_attributes,
                self.resource_associations_by( name, key )
              )
           end
+
         end
 
         # unlock the resource index for this name/key combination
