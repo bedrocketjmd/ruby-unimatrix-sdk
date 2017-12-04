@@ -18,7 +18,7 @@ module Unimatrix
         )
         if object.respond_to?( :fields )
           object.fields.each do | name, options |
-            node_object[ name.to_sym ] = object.send( name )
+            node_object[ name.to_sym ] = object.send( name ) if object.respond_to?( name )
           end
         end
         node_object
