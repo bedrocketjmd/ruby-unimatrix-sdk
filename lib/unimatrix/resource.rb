@@ -25,6 +25,27 @@ module Unimatrix
         @descendants_by_type_name[ type_name ]
       end
 
+      def create_by_type_name( type_name, base_type_name )
+
+        resource_class = find_by_type_name( type_name ) 
+        
+        if resource_class.nil?
+          resource_superclass = find_by_type_name( base_type_name )
+          unless resource_superclass.nil? 
+            resource_module_name = 
+              resource_superclass.name.split( '::' )[ 0..-2 ].join( '::' )
+            resource_module = resource_module_name.blank? ?
+              Object : resource_module_name.constantize 
+            resource_class = resource_module.const_set(
+              type_name.classify, Class.new( resource_superclass )
+            )
+          end
+        end
+
+        resource_class
+        
+      end
+
       def field( name, options = {} )
         self.fields[ name.to_sym ] = options.merge( name: name )
 

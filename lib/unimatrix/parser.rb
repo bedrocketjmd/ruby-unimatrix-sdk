@@ -40,7 +40,7 @@ module Unimatrix
 
       unless self.name.blank?
         result = self.keys.map do | key |
-          self.resource_by( name, key, { 'type_name' => self.type_name } )
+          self.resource_by( name, key )
         end
       end
       result
@@ -64,7 +64,7 @@ module Unimatrix
         resource_type_name = attributes[ :type_name ] || self.type_name
         resource_class = 
           Resource.find_by_type_name( resource_type_name ) ||
-          Resource.find_by_type_name( self.type_name )
+          Resource.create_by_type_name( resource_type_name, self.type_name )
 
         if resource_class.present?
           relations = name == self.name ?
@@ -97,11 +97,12 @@ module Unimatrix
         resource_attributes = resource_attribute_index[ name ][ key ]
         
         if resource_attributes.present?
-          
           resource_type_name = options[ 'type_name' ] || 
                                resource_attributes[ 'type_name' ] 
           
-          resource_class = Resource.find_by_type_name( resource_type_name ) 
+          resource_class = 
+            Resource.find_by_type_name( resource_type_name ) ||
+            Resource.create_by_type_name( resource_type_name, self.type_name )
 
           if resource_class.present?
              result = resource_class.new(
