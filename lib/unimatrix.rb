@@ -29,7 +29,7 @@ require 'unimatrix/activist/task'
 require 'unimatrix/activist/activity'
 
 # archivist
-require 'unimatrix/artifact'
+require 'unimatrix/archivist/artifact'
 
 # distributor
 require 'unimatrix/distributor/destination'
