@@ -1,6 +1,7 @@
 module Unimatrix::Archivist
 
   class Artifact < Unimatrix::DynamicResource
+    
     field    :creator_uuid
     field    :picture_uuid
     field    :provider
@@ -11,11 +12,16 @@ module Unimatrix::Archivist
     field    :slug
     field    :note
     field    :type_name
+    field    :uuid
+    field    :realm_uuid
     field    :component_ids
     field    :relationships
     field    :name
     field    :created_at
     field    :updated_at
+    
+    has_many :artifact_relationships
+    has_many  :errors
 
   end
 
