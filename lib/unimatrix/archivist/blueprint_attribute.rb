@@ -9,6 +9,9 @@ module Unimatrix::Archivist
     field     :name
     field     :readable
     field     :writable
+    field     :type
+    field     :validates_uniqueness
+    field     :validates_uniqueness_scope
     field     :validates_presence
     field     :validates_absence
     field     :validates_format_with
