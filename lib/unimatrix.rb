@@ -28,6 +28,9 @@ require 'unimatrix/bad_request_error'
 require 'unimatrix/activist/task'
 require 'unimatrix/activist/activity'
 
+# archivist
+require 'unimatrix/artifact'
+
 # distributor
 require 'unimatrix/distributor/destination'
 require 'unimatrix/distributor/distribution'
