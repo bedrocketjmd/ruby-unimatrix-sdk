@@ -2,6 +2,7 @@ module Unimatrix::Archivist
 
   class Blueprint < Unimatrix::DynamicResource
     
+    field    :id
     field    :uuid
     field    :realm_uuid
     field    :type_name
