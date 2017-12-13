@@ -24,5 +24,7 @@ module Unimatrix::Archivist
     field     :created_at
     field     :updated_at
     
+    has_many :errors
+    
   end
 end
