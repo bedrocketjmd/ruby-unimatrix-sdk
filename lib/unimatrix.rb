@@ -30,6 +30,11 @@ require 'unimatrix/activist/activity'
 
 # archivist
 require 'unimatrix/archivist/artifact'
+require 'unimatrix/archivist/artifact_locator'
+require 'unimatrix/archivist/artifact_relationship'
+require 'unimatrix/archivist/blueprint'
+require 'unimatrix/archivist/blueprint_attribute'
+require 'unimatrix/archivist/component'
 
 # distributor
 require 'unimatrix/distributor/destination'
