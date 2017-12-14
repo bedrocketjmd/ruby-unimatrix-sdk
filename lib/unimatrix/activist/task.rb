@@ -4,8 +4,8 @@ module Unimatrix::Activist
 
     field   :id
     field   :type_name
-    field   :subject_id
-    field   :activity_id
+    field   :subject_uuid
+    field   :activity_uuid
     field   :subject_type
     field   :state
     field   :message

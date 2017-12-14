@@ -3,7 +3,7 @@ module Unimatrix::Distributor
   class ActivityReference < Unimatrix::Resource
     field    :id
     field    :type_name
-    field    :subject_id
+    field    :subject_uuid
     field    :subject_type
     field    :state
     field    :message
