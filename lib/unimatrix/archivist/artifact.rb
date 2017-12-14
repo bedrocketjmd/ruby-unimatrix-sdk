@@ -19,7 +19,7 @@ module Unimatrix::Archivist
     field    :uuid
     field    :realm_uuid
     field    :component_uuids
-    field    :relationships
+    field    :“relationships.category”
     field    :name
     field    :created_at
     field    :updated_at
