@@ -47,7 +47,7 @@ module Unimatrix
     end
 
     def parse_resource( name, attributes )
-      
+
       @resources_mutex ||= Hash.new { | hash, key | hash[ key ] = [] }
       resource_key = attributes[ key ]
 
@@ -60,9 +60,9 @@ module Unimatrix
       resource = nil
 
       if attributes.present?
-        
+
         resource_type_name = attributes[ :type_name ] || self.type_name
-        resource_class = 
+        resource_class =
           Resource.find_by_type_name( resource_type_name ) ||
           Resource.find_by_type_name( self.type_name )
 
@@ -77,7 +77,7 @@ module Unimatrix
       @resources_mutex[ name ].delete( object_key )
 
       resource
-    
+
     end
 
     def resource_by( name, key, options = {} )
@@ -95,21 +95,20 @@ module Unimatrix
 
         result = nil
         resource_attributes = resource_attribute_index[ name ][ key ]
-        
-        if resource_attributes.present?
-          
-          resource_type_name = options[ 'type_name' ] || 
-                               resource_attributes[ 'type_name' ] 
-          
-          resource_class = Resource.find_by_type_name( resource_type_name ) 
 
+        if resource_attributes.present?
+          parse_nested_attributes( resource_attributes )
+
+          resource_type_name = options[ 'type_name' ] ||
+                               resource_attributes[ 'type_name' ]
+
+          resource_class = Resource.find_by_type_name( resource_type_name )
           if resource_class.present?
              result = resource_class.new(
                resource_attributes,
                self.resource_associations_by( name, key )
              )
           end
-
         end
 
         # unlock the resource index for this name/key combination
@@ -159,6 +158,46 @@ module Unimatrix
         end
         index
       end
+    end
+
+    private; def parse_nested_attributes( attributes )
+
+      nested_attributes = {}
+
+      attributes.delete_if do | key, value |
+
+        if key.include?( '.' )
+
+          key, nested_key = key.split( '.' )
+
+          if nested_attributes[ key ].present?
+            nested_attributes[ key ][ nested_key.to_sym ] = value
+          else
+            nested_attributes[ key ] = { nested_key.to_sym => value }
+          end
+
+          true
+
+        else
+          false
+        end
+
+      end
+
+      if nested_attributes.present?
+
+        nested_attributes.each do | key, value |
+
+          attributes[ key ] = Struct.new( *value.keys ).new
+
+          value.each do | nested_key, nested_value |
+            attributes[ key ][ nested_key ] = nested_value
+          end
+
+        end
+
+      end
+
     end
   end
 end
