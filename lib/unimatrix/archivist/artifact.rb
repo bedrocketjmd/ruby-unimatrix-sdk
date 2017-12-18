@@ -1,7 +1,7 @@
 module Unimatrix::Archivist
 
   class Artifact < Unimatrix::DynamicResource
-    
+
     field    :id
     field    :creator_uuid
     field    :picture_uuid
@@ -19,11 +19,11 @@ module Unimatrix::Archivist
     field    :uuid
     field    :realm_uuid
     field    :component_uuids
-    # field    :“relationships.category”
+    field    relationships: [ :category ]
     field    :name
     field    :created_at
     field    :updated_at
-    
+
     has_many :artifact_relationships
     has_many  :errors
 
