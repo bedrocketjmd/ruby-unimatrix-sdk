@@ -24,6 +24,7 @@ module Unimatrix::Archivist
     field    :created_at
     field    :updated_at
 
+    has_many :artifact_locators
     has_many :artifact_relationships
     has_many  :errors
 
