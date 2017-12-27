@@ -16,6 +16,7 @@ module Unimatrix::Archivist
     field    :slug
     field    :note
     field    :type_name
+    field    :language
     field    :uuid
     field    :realm_uuid
     field    :component_uuids
