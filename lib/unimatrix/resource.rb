@@ -83,7 +83,7 @@ module Unimatrix
         self.send( "#{ key }=", Struct.new( *value ).new )
       end
 
-      self.type_name = self.class.name.split( '::' ).last.underscore
+      self.type_name = self.class.name.split( '::' ).last.underscore rescue nil
 
       attributes.each do | key, value |
         send( "#{ key }=", value ) if self.respond_to?( "#{ key }=" )
