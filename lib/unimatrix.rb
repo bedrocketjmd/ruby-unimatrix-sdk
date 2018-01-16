@@ -13,13 +13,14 @@ require 'unimatrix/serializer'
 
 require 'unimatrix/resource'
 require 'unimatrix/dynamic_resource'
+require 'unimatrix/blueprintable'
 require 'unimatrix/realm'
 
 require 'unimatrix/error'
 require 'unimatrix/attribute_error'
 require 'unimatrix/bad_request_error'
 
-# errors 
+# errors
 require 'unimatrix/error'
 require 'unimatrix/attribute_error'
 require 'unimatrix/bad_request_error'
