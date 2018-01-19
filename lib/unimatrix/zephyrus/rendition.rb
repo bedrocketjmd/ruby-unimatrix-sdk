@@ -1,6 +1,6 @@
 module Unimatrix::Zephyrus
 
-  class Rendition < Unimatrix::Resource
+  class Rendition < Unimatrix::DynamicResource
 
     field :id
     field :created_at

@@ -56,4 +56,3 @@ require 'unimatrix/zephyrus/transcribing_output'
 require 'unimatrix/zephyrus/transcribing_rendition'
 require 'unimatrix/zephyrus/transmutation_output'
 require 'unimatrix/zephyrus/transmutation_rendition'
-
