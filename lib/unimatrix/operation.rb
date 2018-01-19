@@ -75,7 +75,7 @@ module Unimatrix
         response = _response
       end
       if response.success?
-        result = result if result.present? && result.is_a?( Array )
+        result = result.first if result.present? && result.is_a?( Enumerable )
         if block_given?
           case block.arity
             when 0; yield
