@@ -40,3 +40,16 @@ require 'unimatrix/archivist/component'
 require 'unimatrix/distributor/destination'
 require 'unimatrix/distributor/distribution'
 
+# zephyrus
+require 'unimatrix/zephyrus/input'
+require 'unimatrix/zephyrus/output'
+require 'unimatrix/zephyrus/rendition'
+require 'unimatrix/zephyrus/recording_output'
+require 'unimatrix/zephyrus/routing_output'
+require 'unimatrix/zephyrus/transcoding_output'
+require 'unimatrix/zephyrus/transcoding_rendition'
+require 'unimatrix/zephyrus/transcribing_output'
+require 'unimatrix/zephyrus/transcribing_rendition'
+require 'unimatrix/zephyrus/transmutation_output'
+require 'unimatrix/zephyrus/transmutation_rendition'
+
