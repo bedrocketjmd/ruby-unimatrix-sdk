@@ -23,6 +23,10 @@ require 'unimatrix/bad_request_error'
 require 'unimatrix/error'
 require 'unimatrix/attribute_error'
 require 'unimatrix/bad_request_error'
+require 'unimatrix/forbidden_error'
+require 'unimatrix/malformed_parameter_error'
+require 'unimatrix/missing_parameter_error'
+require 'unimatrix/not_found_error'
 
 # activist
 require 'unimatrix/activist/task'
