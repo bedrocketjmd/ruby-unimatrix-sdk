@@ -14,7 +14,16 @@ module Unimatrix
         "resource_type_name": attributes[ "type_name" ]
       } ).include (
         "blueprint_attributes"
-      ).read.first
+      )
+
+      blueprint = blueprint.read.first
+      blueprint_attributes = blueprint.blueprint_attributes
+
+      self.class_eval do
+        blueprint_attributes.each do | attribute |
+          field attribute.name
+        end
+      end
 
       binding.pry
 
