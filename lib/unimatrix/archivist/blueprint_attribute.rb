@@ -1,7 +1,7 @@
 module Unimatrix::Archivist
-  
-  class Blueprint < Unimatrix::DynamicResource
-    
+
+  class BlueprintAttribute < Unimatrix::DynamicResource
+
     field    :id
     field     :uuid
     field     :realm_uuid
@@ -27,8 +27,8 @@ module Unimatrix::Archivist
     field     :validates_type
     field     :created_at
     field     :updated_at
-    
+
     has_many :errors
-    
+
   end
 end
