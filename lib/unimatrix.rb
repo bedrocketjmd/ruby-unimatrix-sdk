@@ -62,6 +62,15 @@ require 'unimatrix/archivist/component'
 require 'unimatrix/distributor/destination'
 require 'unimatrix/distributor/distribution'
 
+# iris
+require 'unimatrix/iris/encoder'
+require 'unimatrix/iris/input'
+require 'unimatrix/iris/output'
+require 'unimatrix/iris/recorder'
+require 'unimatrix/iris/stream'
+require 'unimatrix/iris/transcriber'
+require 'unimatrix/iris/transmutator'
+
 # zephyrus
 require 'unimatrix/zephyrus/input'
 require 'unimatrix/zephyrus/output'
