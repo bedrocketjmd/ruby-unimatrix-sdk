@@ -32,6 +32,24 @@ require 'unimatrix/not_found_error'
 require 'unimatrix/activist/task'
 require 'unimatrix/activist/activity'
 
+# alchemist
+require 'unimatrix/alchemist/activity_proxy'
+require 'unimatrix/alchemist/encoder'
+require 'unimatrix/alchemist/rendition'
+require 'unimatrix/alchemist/rendition_profile'
+require 'unimatrix/alchemist/text'
+require 'unimatrix/alchemist/video'
+require 'unimatrix/alchemist/aws_rendition_profile'
+require 'unimatrix/alchemist/picture_rendition'
+require 'unimatrix/alchemist/sprite_rendition'
+require 'unimatrix/alchemist/text_rendition'
+require 'unimatrix/alchemist/text_storage_activity_proxy'
+require 'unimatrix/alchemist/video_encoding_activity_proxy'
+require 'unimatrix/alchemist/video_picture_activity_proxy'
+require 'unimatrix/alchemist/video_rendition'
+require 'unimatrix/alchemist/video_sprite_activity_proxy'
+require 'unimatrix/alchemist/video_storage_interrogation_picture_activity_proxy'
+
 # archivist
 require 'unimatrix/archivist/artifact'
 require 'unimatrix/archivist/artifact_locator'
@@ -43,6 +61,15 @@ require 'unimatrix/archivist/component'
 # distributor
 require 'unimatrix/distributor/destination'
 require 'unimatrix/distributor/distribution'
+
+# iris
+require 'unimatrix/iris/encoder'
+require 'unimatrix/iris/input'
+require 'unimatrix/iris/output'
+require 'unimatrix/iris/recorder'
+require 'unimatrix/iris/stream'
+require 'unimatrix/iris/transcriber'
+require 'unimatrix/iris/transmutator'
 
 # zephyrus
 require 'unimatrix/zephyrus/input'
