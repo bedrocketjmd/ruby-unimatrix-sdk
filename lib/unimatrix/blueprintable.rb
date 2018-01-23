@@ -3,7 +3,15 @@ module Unimatrix
   class Blueprintable < Resource
 
     class << self
+      alias old_new new
 
+      def new( attributes = {}, associations = {} )
+        Class.new( self ).old_new(
+          { type_name: self.name.split( '::' ).last.underscore }.
+            merge( attributes ),
+          associations
+        )
+      end
     end
 
     def initialize( attributes = {}, associations = {} )
@@ -24,6 +32,9 @@ module Unimatrix
           field attribute.name
         end
       end
+
+      super( attributes, associations )
+      yield self if block_given?
 
       binding.pry
 
