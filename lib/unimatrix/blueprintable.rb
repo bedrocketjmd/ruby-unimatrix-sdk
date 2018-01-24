@@ -7,7 +7,7 @@ module Unimatrix
       alias build new
 
       def new( attributes = {}, associations = {} )
-        klass = get_class( attributes )
+        klass = get_class( attributes.with_indifferent_access )
 
         klass.build(
           attributes,
@@ -34,13 +34,17 @@ module Unimatrix
 
 
     def initialize( attributes = {}, associations = {} )
-      blueprints = unimatrix_operation(
-        "/realms/#{ attributes[ "realm_uuid" ] }/blueprints"
-      ).where( {
-        "resource_type_name": attributes[ "type_name" ]
-      } ).include (
-        "blueprint_attributes"
-      )
+      attributes =  attributes.with_indifferent_access
+
+      blueprints =
+        Unimatrix::Operation.new(
+          "/realms/#{ attributes[ "realm_uuid" ] }/blueprints",
+          { access_token: token }
+        ).where( {
+          "resource_type_name": attributes[ "type_name" ]
+        } ).include (
+          "blueprint_attributes"
+        )
 
       blueprints = blueprints.read
 
@@ -75,13 +79,6 @@ module Unimatrix
            client_secret: ENV[ 'KEYMAKER_SECRET' ]
          ).request_token
       end
-    end
-
-    protected; def unimatrix_operation( endpoint, args = {} )
-      Unimatrix::Operation.new(
-          endpoint,
-          args.merge( { access_token: token } )
-      )
     end
 
   end
