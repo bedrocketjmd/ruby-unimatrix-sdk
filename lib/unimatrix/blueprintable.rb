@@ -4,7 +4,18 @@ module Unimatrix
 
     class << self
 
+      alias build new
+
       def new( attributes = {}, associations = {} )
+        klass = get_class( attributes )
+
+        klass.build(
+          attributes,
+          associations
+        )
+      end
+
+      def get_class( attributes )
         module_name = Unimatrix.const_get( self.name.split( '::' )[1].underscore.camelize )
         entity_name = self.name.split( '::' ).last.underscore.camelize
         entity_type_name = attributes[ 'type_name' ].camelize
@@ -17,10 +28,10 @@ module Unimatrix
         else
           klass = module_name.const_get( entity_type_name )
         end
-
-        klass
       end
+
     end
+
 
     def initialize( attributes = {}, associations = {} )
       blueprints = unimatrix_operation(
@@ -36,6 +47,7 @@ module Unimatrix
       unless blueprints.empty?
         blueprint = blueprints.first rescue nil
 
+        #Always prefer realm-scoped blueprint
         blueprints.each do | b |
           unless b.realm_uuid.nil?
             blueprint = b
@@ -54,7 +66,6 @@ module Unimatrix
       end
 
       super( attributes, associations )
-      yield self if block_given?
     end
 
     protected; def token
