@@ -13,7 +13,7 @@ module Unimatrix::Alchemist
 
     has_many :renditions
     has_many :activity_proxies
-    has_many :encoders
+    has_many :video_encoders
 
   end
 

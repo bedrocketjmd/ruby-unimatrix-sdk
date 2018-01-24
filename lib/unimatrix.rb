@@ -34,11 +34,11 @@ require 'unimatrix/activist/activity'
 
 # alchemist
 require 'unimatrix/alchemist/activity_proxy'
-require 'unimatrix/alchemist/encoder'
 require 'unimatrix/alchemist/rendition'
 require 'unimatrix/alchemist/rendition_profile'
 require 'unimatrix/alchemist/text'
 require 'unimatrix/alchemist/video'
+require 'unimatrix/alchemist/video_encoder'
 require 'unimatrix/alchemist/aws_rendition_profile'
 require 'unimatrix/alchemist/picture_rendition'
 require 'unimatrix/alchemist/sprite_rendition'

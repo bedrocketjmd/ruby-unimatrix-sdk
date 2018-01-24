@@ -34,7 +34,7 @@ module Unimatrix::Alchemist
     field :audio_bit_rate
     field :audio_sample_rate
 
-    has_many :encoders
+    has_many :video_encoders
     has_many :renditions
     has_many :activity_proxies
 
