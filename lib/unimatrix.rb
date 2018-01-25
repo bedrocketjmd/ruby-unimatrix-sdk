@@ -19,7 +19,7 @@ require 'unimatrix/error'
 require 'unimatrix/attribute_error'
 require 'unimatrix/bad_request_error'
 
-# errors 
+# errors
 require 'unimatrix/error'
 require 'unimatrix/attribute_error'
 require 'unimatrix/bad_request_error'
@@ -83,3 +83,6 @@ require 'unimatrix/zephyrus/transcribing_output'
 require 'unimatrix/zephyrus/transcribing_rendition'
 require 'unimatrix/zephyrus/transmutation_output'
 require 'unimatrix/zephyrus/transmutation_rendition'
+
+# curator
+require 'unimatrix/curator/source'
