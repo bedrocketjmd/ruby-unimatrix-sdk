@@ -63,13 +63,13 @@ require 'unimatrix/distributor/destination'
 require 'unimatrix/distributor/distribution'
 
 # iris
-require 'unimatrix/iris/encoder'
-require 'unimatrix/iris/input'
-require 'unimatrix/iris/output'
-require 'unimatrix/iris/recorder'
 require 'unimatrix/iris/stream'
-require 'unimatrix/iris/transcriber'
-require 'unimatrix/iris/transmutator'
+require 'unimatrix/iris/stream_encoder'
+require 'unimatrix/iris/stream_input'
+require 'unimatrix/iris/stream_output'
+require 'unimatrix/iris/stream_recorder'
+require 'unimatrix/iris/stream_transcriber'
+require 'unimatrix/iris/stream_transmutator'
 
 # zephyrus
 require 'unimatrix/zephyrus/input'
