@@ -1,6 +1,6 @@
 module Unimatrix::Iris
 
-  class Input < Unimatrix::DynamicResource
+  class StreamTransmutator < Unimatrix::DynamicResource
 
     field :id
     field :created_at
@@ -8,7 +8,11 @@ module Unimatrix::Iris
     field :uuid
     field :state
     field :url
-    field :region
+    field :video_bitrate
+    field :audio_bitrate
+    field :height
+    field :width
+    field :audio_sample_rate
     field :stream_id
     field :stream_uuid
 
