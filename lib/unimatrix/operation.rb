@@ -50,7 +50,7 @@ module Unimatrix
       self.spawn( :include => self.normalize_include( *arguments ) )
     end
 
-    def query( &block )
+    def read( &block )
       result = nil
       Request.new.tap do | request |
         request.get( @path, @parameters ).tap do | response |
@@ -61,26 +61,6 @@ module Unimatrix
               when 1; yield result
               when 2; yield result, response
             end
-          end
-        end
-      end
-      result
-    end
-
-    def read( &block )
-      response = nil
-      result = nil
-      self.query do | _result, _response |
-        result = _result
-        response = _response
-      end
-      if response.success?
-        result = result.first if result.present? && result.is_a?( Enumerable )
-        if block_given?
-          case block.arity
-            when 0; yield
-            when 1; yield result
-            when 2; yield result, response
           end
         end
       end
