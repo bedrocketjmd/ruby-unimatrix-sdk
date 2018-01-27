@@ -1,75 +1,76 @@
 module Unimatrix
 
-  class Blueprintable < Resource
+  module Blueprintable
 
-    class << self
+    def blueprintable( &block )
+      block.call( blueprints )
+    end
 
-      alias build new
+    def blueprints
+      @blueprints ||= begin
+        blueprints =
+          Unimatrix::Operation.new(
+            "/realms/#{ @realm_uuid } }/blueprints",
+            { access_token: token }
+          ).include (
+            "blueprint_attributes"
+          )
 
-      def new( attributes = {}, associations = {} )
-        klass = get_class( attributes.with_indifferent_access )
+          blueprints.read
+      end
+    end
 
-        klass.build(
-          attributes,
-          associations
-        )
+    def find_blueprint( entity )
+      blueprint = nil
+
+      blueprints.each do | b |
+        if ( b.resource_type_name == entity.type_name ) &&
+           ( blueprint.nil? || blueprint.realm_uuid.nil? )
+
+          blueprint = b
+        end
       end
 
-      def get_class( attributes )
-        module_name = Unimatrix.const_get( self.name.split( '::' )[1].underscore.camelize )
-        entity_name = self.name.split( '::' ).last.underscore.camelize
-        entity_type_name = attributes[ 'type_name' ].camelize
+      blueprint
+    end
 
-        klass = ( module_name.const_get( entity_name ) rescue nil )
+    def build_with_blueprint( entity )
+      blueprint = find_blueprint( entity )
+      klass = typed_class( blueprint, entity )
+
+      klass.new( JSON.parse( entity.to_json ) )
+      #associations?
+    end
+
+    def typed_class( blueprint, entity )
+      klass = nil
+
+      unless blueprint.nil?
+        module_name = Unimatrix.const_get( entity.class.name.split( '::' )[1].underscore.camelize )
+        entity_type_name = entity.type_name.camelize
 
         unless module_name.const_defined?( entity_type_name )
-          typed_klass = Class.new( klass )
-          klass = module_name.const_set( entity_type_name, typed_klass )
+          base_class = Class.new( entity.class )
+          #base_class = Class.new( Unimatrix::Resource )
+          klass = module_name.const_set( entity_type_name, base_class )
         else
           klass = module_name.const_get( entity_type_name )
         end
       end
 
+      #add_attributes_to_typed_class( blueprint, klass )
+      klass
     end
 
+    def add_attributes_to_typed_class( blueprint, klass )
+      if blueprint.respond_to?( 'blueprint_attributes' )
+        blueprint_attributes = blueprint.blueprint_attributes
 
-    def initialize( attributes = {}, associations = {} )
-      attributes =  attributes.with_indifferent_access
+        #calls field on the class per blueprint attribute
+           #is this enough? wont I need fields on the base class
+        #returns the klass
 
-      blueprints =
-        Unimatrix::Operation.new(
-          "/realms/#{ attributes[ "realm_uuid" ] }/blueprints",
-          { access_token: token }
-        ).where( {
-          "resource_type_name": attributes[ "type_name" ]
-        } ).include (
-          "blueprint_attributes"
-        )
-
-      blueprints = blueprints.read
-
-      unless blueprints.empty?
-        blueprint = blueprints.first rescue nil
-
-        #Always prefer realm-scoped blueprint
-        blueprints.each do | b |
-          unless b.realm_uuid.nil?
-            blueprint = b
-          end
-        end
-
-        if blueprint.respond_to?( 'blueprint_attributes' )
-          blueprint_attributes = blueprint.blueprint_attributes
-
-          self.class_eval do
-            blueprint_attributes.each do | attribute |
-              field attribute.name
-            end
-          end
-        end
       end
-
-      super( attributes, associations )
     end
 
     protected; def token

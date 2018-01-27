@@ -1,6 +1,6 @@
 module Unimatrix::Archivist
 
-  class Artifact < Unimatrix::Blueprintable
+  class Artifact < Unimatrix::DynamicResource
 
     field    :id
     field    :creator_uuid
