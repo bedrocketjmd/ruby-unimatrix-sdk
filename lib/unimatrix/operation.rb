@@ -1,3 +1,5 @@
+require 'benchmark'
+
 module Unimatrix
 
   class Operation
@@ -29,12 +31,18 @@ module Unimatrix
 
     def destroy
       result = nil
-      Request.new.tap do | request |
+
+      time = Benchmark.measure do
+
+        Request.new.tap do | request |
         response = request.destroy( @path, @parameters )
         if response.present?
           result = response.resources
         end
+        end
+
       end
+      print_benchmark("DESTROY", @path, time)
       result
     end
 
@@ -53,7 +61,9 @@ module Unimatrix
     def read( &block )
       result = nil
       response = nil
-      Request.new.tap do | request |
+      time = Benchmark.measure do
+
+        Request.new.tap do | request |
         request.get( @path, @parameters ).tap do | response |
           result = response.resources
           if block_given?
@@ -64,13 +74,18 @@ module Unimatrix
             end
           end
         end
+        end
+
       end
+      print_benchmark("READ", @path, time)
       result
     end
 
     def write( node, objects, &block )
       result = nil
-      Request.new.tap do | request |
+      time = Benchmark.measure do
+
+        Request.new.tap do | request |
         serializer = Unimatrix::Serializer.new( objects )
         response = request.post( @path, @parameters, serializer.serialize( node ) )
         if response.present?
@@ -84,7 +99,17 @@ module Unimatrix
           end
         end
       end
+
+      end
+      print_benchmark("WRITE", @path, time)
       result
+    end
+
+    def print_benchmark(method, path, time)
+      locations = []
+      caller_locations(1..5).each{|x| locations << x.label}
+
+      puts "\n BENCHMARK: \n #{method} #{@path} \n ELAPSED #{time.real} \n TRACE: #{locations.join(' -> ')} \n \n"
     end
 
     protected; def spawn( parameters  )
