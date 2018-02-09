@@ -86,3 +86,7 @@ require 'unimatrix/zephyrus/transmutation_rendition'
 
 # curator
 require 'unimatrix/curator/source'
+
+# quartermaster
+require 'unimatrix/quartermaster/binary'
+require 'unimatrix/quartermaster/binaires_ingressor'
