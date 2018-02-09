@@ -3,7 +3,6 @@ module Unimatrix::Quartermaster
   class Binary < Unimatrix::DynamicResource
 
     field :id
-    field :type_name
     field :filename
     field :content_length
     field :content_type
@@ -14,7 +13,7 @@ module Unimatrix::Quartermaster
     field :uuid
 
     has_many :binaries_ingressors
-    
+
   end
 
 end
