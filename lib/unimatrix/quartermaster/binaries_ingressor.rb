@@ -13,8 +13,6 @@ module Unimatrix::Quartermaster
     field      :binary_id
     field      :url
 
-    belongs_to :binary
-
   end
 
 end
