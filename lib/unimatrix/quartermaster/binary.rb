@@ -11,6 +11,7 @@ module Unimatrix::Quartermaster
     field :updated_at
     field :properties
     field :uuid
+    field :storage_key
 
     has_many :binaries_ingressors
 
