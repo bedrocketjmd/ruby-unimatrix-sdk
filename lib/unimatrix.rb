@@ -31,6 +31,7 @@ require 'unimatrix/not_found_error'
 # activist
 require 'unimatrix/activist/task'
 require 'unimatrix/activist/activity'
+require 'unimatrix/activist/activities_schedule'
 
 # alchemist
 require 'unimatrix/alchemist/activity_proxy'

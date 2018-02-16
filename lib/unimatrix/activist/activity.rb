@@ -20,7 +20,6 @@ module Unimatrix::Activist
 
     has_many :tasks
     has_one  :realm
-
   end
 
 end
