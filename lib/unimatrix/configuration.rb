@@ -26,8 +26,11 @@ module Unimatrix
       )
     end
 
-    field :url,                default: ENV[ 'UNIMATRIX_API_URL' ]
-    field :authorization_url,  default: ENV[ 'AUTHORIZATION_URL' ]
+    field :url,                default: ENV[ 'UNIMATRIX_URL' ] || 
+                                        'http://us-west-2.api.unimatrix.io/'
+    
+    field :authorization_url,  default: ENV[ 'UNIMATRIX_AUTHORIZATION_URL' ] || 
+                                        'http://us-west-2.keymaker.boxxspring.net/'
   end
 
 end
