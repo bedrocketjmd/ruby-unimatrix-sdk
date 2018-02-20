@@ -26,8 +26,8 @@ module Unimatrix
       )
     end
 
-    field :url,              default: ENV[ 'UNIMATRIX_API_URL' ]
-    field :authorization_url,     default: ENV[ 'AUTHORIZATION_URL' ]
+    field :url,                default: ENV[ 'UNIMATRIX_API_URL' ]
+    field :authorization_url,  default: ENV[ 'AUTHORIZATION_URL' ]
   end
 
 end
