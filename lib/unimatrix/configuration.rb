@@ -27,7 +27,7 @@ module Unimatrix
     end
 
     field :url,              default: ENV[ 'UNIMATRIX_API_URL' ]
-    field :keymaker_url,     default: ENV[ 'KEYMAKER_URL' ]
+    field :authorization_url,     default: ENV[ 'AUTHORIZATION_URL' ]
   end
 
 end
