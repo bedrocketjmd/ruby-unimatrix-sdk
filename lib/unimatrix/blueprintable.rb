@@ -1,3 +1,5 @@
+require 'pry'
+
 module Unimatrix
 
   module Blueprintable
@@ -7,11 +9,13 @@ module Unimatrix
     end
 
     def blueprints
+     #should we page through blueprints? count?
+
       @blueprints ||= begin
         blueprints =
           Unimatrix::Operation.new(
-            "/realms/#{ @realm_uuid } }/blueprints",
-            { access_token: token }
+            "/realms/#{ @realm_uuid }/blueprints",
+            { access_token: token, count: 100 }
           ).include (
             "blueprint_attributes"
           )
@@ -35,11 +39,15 @@ module Unimatrix
     end
 
     def build_with_blueprint( entity )
-      blueprint = find_blueprint( entity )
-      klass = typed_class( blueprint, entity )
+      begin
+        blueprint = find_blueprint( entity )
+        klass = typed_class( blueprint, entity )
 
-      klass.new( JSON.parse( entity.to_json ) )
-      #associations?
+        klass.new( JSON.parse( entity.to_json ) )
+        #associations?
+      rescue
+        entity
+      end
     end
 
     def typed_class( blueprint, entity )
