@@ -1,6 +1,6 @@
 module Unimatrix::Iris
 
-  class Encoder < Unimatrix::DynamicResource
+  class StreamInput < Unimatrix::DynamicResource
 
     field :id
     field :created_at
@@ -11,7 +11,7 @@ module Unimatrix::Iris
     field :region
     field :stream_id
     field :stream_uuid
-    
+
   end
 
 end

@@ -52,6 +52,7 @@ module Unimatrix
 
     def read( &block )
       result = nil
+      response = nil
       Request.new.tap do | request |
         request.get( @path, @parameters ).tap do | response |
           result = response.resources

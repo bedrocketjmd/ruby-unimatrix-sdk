@@ -32,6 +32,7 @@ require 'unimatrix/not_found_error'
 # activist
 require 'unimatrix/activist/task'
 require 'unimatrix/activist/activity'
+require 'unimatrix/activist/activities_schedule'
 
 # alchemist
 require 'unimatrix/alchemist/activity_proxy'
@@ -64,13 +65,13 @@ require 'unimatrix/distributor/destination'
 require 'unimatrix/distributor/distribution'
 
 # iris
-require 'unimatrix/iris/encoder'
-require 'unimatrix/iris/input'
-require 'unimatrix/iris/output'
-require 'unimatrix/iris/recorder'
 require 'unimatrix/iris/stream'
-require 'unimatrix/iris/transcriber'
-require 'unimatrix/iris/transmutator'
+require 'unimatrix/iris/stream_encoder'
+require 'unimatrix/iris/stream_input'
+require 'unimatrix/iris/stream_output'
+require 'unimatrix/iris/stream_recorder'
+require 'unimatrix/iris/stream_transcriber'
+require 'unimatrix/iris/stream_transmutator'
 
 # zephyrus
 require 'unimatrix/zephyrus/input'
@@ -84,3 +85,10 @@ require 'unimatrix/zephyrus/transcribing_output'
 require 'unimatrix/zephyrus/transcribing_rendition'
 require 'unimatrix/zephyrus/transmutation_output'
 require 'unimatrix/zephyrus/transmutation_rendition'
+
+# curator
+require 'unimatrix/curator/source'
+
+# quartermaster
+require 'unimatrix/quartermaster/binary'
+require 'unimatrix/quartermaster/binaries_ingressor'
