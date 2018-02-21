@@ -99,7 +99,7 @@ module Unimatrix
         if resource_attributes.present?
           parse_nested_attributes( resource_attributes )
 
-          resource_class = find_resource_class_by_type_name( 
+          resource_class = find_resource_class_by_type_name(
             resource_attributes[ 'type_name' ],
             options[ 'type_name' ]
           )
@@ -126,6 +126,7 @@ module Unimatrix
       unless resource_class.present?
         resource_class = Resource.find_by_type_name( option_type_name )
       end
+      resource_class
     end
 
     def resource_associations_by( name, key )
