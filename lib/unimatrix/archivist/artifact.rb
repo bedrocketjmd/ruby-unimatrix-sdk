@@ -1,6 +1,6 @@
 module Unimatrix::Archivist
 
-  class Artifact < Unimatrix::DynamicResource
+  class Artifact < Unimatrix::Resource
 
     field    :id
     field    :creator_uuid

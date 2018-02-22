@@ -9,8 +9,6 @@ module Unimatrix
     end
 
     def blueprints
-     #should we page through blueprints? count?
-
       @blueprints ||= begin
         blueprints =
           Unimatrix::Operation.new(
@@ -41,44 +39,48 @@ module Unimatrix
     def build_with_blueprint( entity )
       begin
         blueprint = find_blueprint( entity )
-        klass = typed_class( blueprint, entity )
 
-        klass.new( JSON.parse( entity.to_json ) )
-        #associations?
+        unless blueprint.nil?
+          klass = typed_class( entity )
+          entity = copy_attributes( blueprint, entity )
+        end
+
+        klass.new( entity )
       rescue
         entity
       end
     end
 
-    def typed_class( blueprint, entity )
+    def typed_class( entity )
       klass = nil
 
-      unless blueprint.nil?
-        module_name = Unimatrix.const_get( entity.class.name.split( '::' )[1].underscore.camelize )
-        entity_type_name = entity.type_name.camelize
+      module_name = Unimatrix.const_get( entity.class.name.split( '::' )[1].underscore.camelize )
+      entity_type_name = entity.type_name.camelize
 
-        unless module_name.const_defined?( entity_type_name )
-          base_class = Class.new( entity.class )
-          #base_class = Class.new( Unimatrix::Resource )
-          klass = module_name.const_set( entity_type_name, base_class )
-        else
-          klass = module_name.const_get( entity_type_name )
-        end
+      unless module_name.const_defined?( entity_type_name )
+        base_class = Class.new( entity.class )
+        klass = module_name.const_set( entity_type_name, base_class )
+      else
+        klass = module_name.const_get( entity_type_name )
       end
 
-      #add_attributes_to_typed_class( blueprint, klass )
       klass
     end
 
-    def add_attributes_to_typed_class( blueprint, klass )
-      if blueprint.respond_to?( 'blueprint_attributes' )
-        blueprint_attributes = blueprint.blueprint_attributes
+    def copy_attributes( blueprint, entity )
+      default_attributes = [ "type_name", "relationships", "realm_uuid" ]
+      attributes = {}
 
-        #calls field on the class per blueprint attribute
-           #is this enough? wont I need fields on the base class
-        #returns the klass
+      if blueprint.respond_to?( 'blueprint_attributes' )
+        permitted_attributes = blueprint.blueprint_attributes.map( &:name ) + default_attributes
+
+        permitted_attributes.each do | field |
+          attributes[ field ] = entity.send( field ) if entity.respond_to?( field )
+        end
 
       end
+
+      attributes
     end
 
     protected; def token
