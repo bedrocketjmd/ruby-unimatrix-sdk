@@ -1,16 +1,16 @@
 require 'net/http'
 require 'json'
 
-module Unimatrix::Authorization 
+module Unimatrix::Authorization
   class ClientCredentialsGrant
-    
+
     def initialize( args )
       @client_id = args[ :client_id ]
       @client_secret = args[ :client_secret ]
     end
 
     def request_token
-      uri      = URI.parse( "#{ Unimatrix.configuration.url }/token" )
+      uri      = URI.parse( "#{ Unimatrix.configuration.authorization_url }/token" )
       params   = { "grant_type" => "client_credentials" }
       http     = Net::HTTP.new( uri.host, uri.port )
       request  = Net::HTTP::Post.new( uri.request_uri )
