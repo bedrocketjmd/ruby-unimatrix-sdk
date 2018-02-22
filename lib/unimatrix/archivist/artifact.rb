@@ -20,11 +20,7 @@ module Unimatrix::Archivist
     field    :uuid
     field    :realm_uuid
     field    :component_uuids
-    field    relationships: [ :category ]
-    field    relationships: [ :cast ]
-    field    relationships: [ :season ]
-    field    relationships: [ :asset ]
-    field    relationships: [ :athlete ]
+    field    relationships: [ :category, :cast, :season, :asset, :athlete ]
     field    :name
     field    :created_at
     field    :updated_at
