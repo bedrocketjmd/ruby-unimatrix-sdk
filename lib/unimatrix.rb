@@ -60,6 +60,15 @@ require 'unimatrix/archivist/blueprint'
 require 'unimatrix/archivist/blueprint_attribute'
 require 'unimatrix/archivist/component'
 
+# authorization
+require 'unimatrix/authorization/filters/requires_policies' if defined?( Rails )
+require 'unimatrix/authorization/railtie' if defined?( Rails )
+require 'unimatrix/authorization/client_credentials_grant'
+require 'unimatrix/authorization/policy'
+require 'unimatrix/authorization/resource'
+require 'unimatrix/authorization/resource_owner'
+require 'unimatrix/authorization/resource_server'
+
 # distributor
 require 'unimatrix/distributor/destination'
 require 'unimatrix/distributor/distribution'
