@@ -1,5 +1,3 @@
-require 'pry'
-
 module Unimatrix
 
   module Blueprintable
@@ -59,6 +57,7 @@ module Unimatrix
 
       unless module_name.const_defined?( entity_type_name )
         base_class = Class.new( entity.class )
+        #base_class = Class.new( Unimatrix::Resource )
         klass = module_name.const_set( entity_type_name, base_class )
       else
         klass = module_name.const_get( entity_type_name )
