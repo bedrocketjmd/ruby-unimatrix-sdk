@@ -1,24 +1,20 @@
-module Unimatrix::Activist
+module Unimatrix::Curator
 
-  class Activity < Unimatrix::DynamicResource
+  class ActivityReference < Unimatrix::DynamicResource
     field    :id
     field    :type_name
-    field    :artifact_uuid
     field    :subject_uuid
     field    :subject_type
     field    :state
-    field    :uuid
     field    :message
     field    :properties
+    field    :source_uuid
     field    :completed_at
     field    :destroyed_at
     field    :created_at
     field    :updated_at
     field    :execute_at
-    field    :expire_at
-    field    :activities_schedule_id
 
-    has_many :tasks
     has_one  :realm
   end
 
