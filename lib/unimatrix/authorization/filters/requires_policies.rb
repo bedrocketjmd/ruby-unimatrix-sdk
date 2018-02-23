@@ -106,7 +106,7 @@ module Unimatrix::Authorization
       Unimatrix::Operation.new( '/policies' ).where(
         access_token: access_token,
         resource: "realm/#{ realm_uuid }::#{ resource_server }::#{ resource_name }/*"
-      ).query
+      ).read
     end
   end
 
