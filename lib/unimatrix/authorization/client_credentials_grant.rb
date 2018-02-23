@@ -10,7 +10,7 @@ module Unimatrix::Authorization
     end
 
     def request_token
-      uri      = URI.parse( "#{ Unimatrix.configuration.url }/token" )
+      uri      = URI.parse( "#{ Unimatrix.configuration.authorization_url }/token" )
       params   = { "grant_type" => "client_credentials" }
       http     = Net::HTTP.new( uri.host, uri.port )
       request  = Net::HTTP::Post.new( uri.request_uri )
