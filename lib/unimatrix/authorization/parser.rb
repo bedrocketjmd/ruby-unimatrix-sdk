@@ -1,6 +1,6 @@
 module Unimatrix::Authorization
 
-  class Parser  < Unimatrix::Parser
+  class Parser
 
     def initialize( content = {} )
       @content = content
