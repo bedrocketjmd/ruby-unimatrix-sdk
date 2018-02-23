@@ -102,8 +102,7 @@ module Unimatrix::Authorization
   def request_policies( resource_name, access_token, realm_uuid, resource_server )
     if resource_name && access_token
       realm_uuid = realm_uuid || '*'
-
-      Unimatrix::Operation.new( '/policies' ).where(
+      Operation.new( '/policies' ).where(
         access_token: access_token,
         resource: "realm/#{ realm_uuid }::#{ resource_server }::#{ resource_name }/*"
       ).read
