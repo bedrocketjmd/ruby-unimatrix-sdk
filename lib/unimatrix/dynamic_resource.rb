@@ -4,22 +4,14 @@ module Unimatrix
 
     class << self
 
-      alias build new
+      alias old_new new
 
       def new( attributes = {}, associations = {} )
-        klass = base_class( attributes )
-
-        klass.build(
-          attributes,
+        Class.new( self ).old_new(
+          { type_name: self.name.split( '::' ).last.underscore }.
+            merge( attributes ),
           associations
         )
-      end
-
-      def base_class( attributes )
-        module_name = Unimatrix.const_get( self.name.split( '::' )[1].underscore.camelize )
-        entity_name = self.name.split( '::' ).last.underscore.camelize
-
-        ( module_name.const_get( entity_name ) rescue Class )
       end
 
     end
