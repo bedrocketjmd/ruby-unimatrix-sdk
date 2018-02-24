@@ -62,6 +62,10 @@ require 'unimatrix/archivist/blueprint_attribute'
 require 'unimatrix/archivist/component'
 
 # authorization
+require 'unimatrix/authorization/operation'
+require 'unimatrix/authorization/parser'
+require 'unimatrix/authorization/request'
+require 'unimatrix/authorization/response'
 require 'unimatrix/authorization/filters/requires_policies' if defined?( Rails )
 require 'unimatrix/authorization/railtie' if defined?( Rails )
 require 'unimatrix/authorization/client_credentials_grant'
