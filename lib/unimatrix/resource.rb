@@ -26,6 +26,10 @@ module Unimatrix
         @descendants_by_type_name[ type_name ]
       end
 
+      def build( attributes = {} )
+        new( attributes )
+      end
+
       def field( name, options = {} )
         if name.is_a?( Hash )
           nested_field_key = name.keys.first

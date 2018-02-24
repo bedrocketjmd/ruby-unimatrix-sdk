@@ -2,6 +2,8 @@ module Unimatrix::Archivist
 
   class Artifact < Unimatrix::Resource
 
+    include Unimatrix::Blueprintable
+
     field    :id
     field    :creator_uuid
     field    :picture_uuid
