@@ -9,7 +9,7 @@ module Unimatrix
 
       class << klass
         cattr_accessor :blueprints
- 
+
         def find_blueprint( attributes )
           blueprint = nil
 
@@ -41,12 +41,12 @@ module Unimatrix
           end
         end
 
-        def build_typed_class( attributes, blueprint )  
+        def build_typed_class( attributes, blueprint )
           klass = nil
 
           module_name = Unimatrix.const_get( self.name.split( '::' )[1].underscore.camelize )
-          entity_type_name = attributes[ 'type_name' ].camelize + attributes[ 'realm_uuid' ] 
-          
+          entity_type_name = attributes[ 'type_name' ].camelize + attributes[ 'realm_uuid' ]
+
           #if type name fails, make base class
 
           unless module_name.const_defined?( entity_type_name )
@@ -62,7 +62,7 @@ module Unimatrix
             permitted_attributes = blueprint.blueprint_attributes.map( &:name ) + default_attributes
 
             klass.instance_eval do
-              permitted_attributes.each do | field_name | 
+              permitted_attributes.each do | field_name |
                 field field_name.to_sym
               end
             end
@@ -71,7 +71,7 @@ module Unimatrix
           klass
         end
       end
-    end 
+    end
 
     def self.assign_blueprints( blueprints )
       @module_members.map{ | klass | klass.blueprints = blueprints }
