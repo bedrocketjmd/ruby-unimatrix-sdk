@@ -9,7 +9,7 @@ module Unimatrix
       super( "/realms/#{ realm_uuid }/blueprints", options )
     end
 
-    def read     
+    def read
       @@blueprints[ @realm_uuid ] ||= begin
 
         blueprints = []
@@ -22,6 +22,12 @@ module Unimatrix
 
         while total.nil? || offset < total
           operation.read do | resources, response |
+
+            if !response.body[ 'errors' ].nil?
+              blueprints = response.body[ 'errors' ]
+              break
+            end
+
             response = response.body[ '$this' ]
 
             offset += segment_count
@@ -31,11 +37,11 @@ module Unimatrix
 
             operation = self.offset( offset ).include( 'blueprint_attributes' )
           end
-        end 
-# check if any fail, then fail the operation
+        end
+
         blueprints
 
-      end  
+      end
     end
 
   end
