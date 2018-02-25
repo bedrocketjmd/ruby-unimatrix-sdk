@@ -24,7 +24,6 @@ module Unimatrix
         while total.nil? || offset < total
           operation.read do | resources, response |
 
-            binding.pry
             if !response.body[ 'errors' ].nil?
               errors = response.body[ 'errors' ]
               break
