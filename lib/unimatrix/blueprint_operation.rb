@@ -11,17 +11,16 @@ module Unimatrix
 
     def read
       @@blueprints[ @realm_uuid ] ||= begin
-
         blueprints = []
 
         offset = 0
         segment_count = 10
         total = nil
-
-        operation = self.offset( offset ).include( 'blueprint_attributes' )
         errors = nil
 
         while total.nil? || offset < total
+          operation = self.offset( offset ).include( 'blueprint_attributes' )
+
           operation.read do | resources, response |
 
             if !response.body[ 'errors' ].nil?
@@ -33,8 +32,6 @@ module Unimatrix
             total = response.body[ '$this' ][ 'unlimited_count' ]
 
             blueprints += resources
-
-            operation = self.offset( offset ).include( 'blueprint_attributes' )
           end
 
           break if !errors.nil?
