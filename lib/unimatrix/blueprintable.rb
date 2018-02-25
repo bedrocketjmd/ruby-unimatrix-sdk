@@ -31,7 +31,8 @@ module Unimatrix
         end
 
         def build_typed_class( attributes, blueprint )
-          klass = Class.new( self )
+          base_class = Class.new( self )
+          klass = base_class
 
           if !blueprint.nil?
             module_name = Unimatrix.const_get( self.name.split( '::' )[1].underscore.camelize )
