@@ -19,24 +19,25 @@ module Unimatrix
         total = nil
 
         operation = self.offset( offset ).include( 'blueprint_attributes' )
+        errors = nil
 
         while total.nil? || offset < total
           operation.read do | resources, response |
 
-            if !response.body[ 'errors' ].nil?
-              blueprints = response.body[ 'errors' ]
+            if !response.body[ 'errors' ].empty?
+              errors = response.body[ 'errors' ]
               break
             end
 
-            response = response.body[ '$this' ]
-
             offset += segment_count
-            total = response[ 'unlimited_count' ]
+            total = response.body[ '$this' ][ 'unlimited_count' ]
 
             blueprints += resources
 
             operation = self.offset( offset ).include( 'blueprint_attributes' )
           end
+
+          break if !errors.nil?
         end
 
         blueprints

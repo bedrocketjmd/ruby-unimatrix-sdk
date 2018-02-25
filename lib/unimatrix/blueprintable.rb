@@ -31,10 +31,9 @@ module Unimatrix
         end
 
         def build_typed_class( attributes, blueprint )
-          klass = nil
-          base_class = Class.new( self )
+          klass = Class.new( self )
 
-          begin
+          if !blueprint.nil?
             module_name = Unimatrix.const_get( self.name.split( '::' )[1].underscore.camelize )
             entity_type_name = attributes[ 'type_name' ].camelize + attributes[ 'realm_uuid' ]
 
@@ -56,8 +55,6 @@ module Unimatrix
             else
               klass = module_name.const_get( entity_type_name )
             end
-          rescue
-            klass = base_class
           end
 
           klass
