@@ -19,7 +19,7 @@ module Unimatrix::Authorization
         end
       else
         @success  = false
-        @resources << Error.new(
+        @resources << Unimatrix::Error.new(
           message: "#{ @code }: #{ http_response.message }."
         )
       end
