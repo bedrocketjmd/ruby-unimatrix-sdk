@@ -126,6 +126,7 @@ module Unimatrix
       unless resource_class.present?
         resource_class = Resource.find_by_type_name( option_type_name )
       end
+      resource_class
     end
 
     def resource_associations_by( name, key )
