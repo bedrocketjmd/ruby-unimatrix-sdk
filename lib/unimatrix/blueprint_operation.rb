@@ -34,11 +34,10 @@ module Unimatrix
             blueprints += resources
           end
 
-          break if !errors.nil?
+          raise "Error requesting blueprints for realm #{ @realm_uuid }. Error: #{ errors }"  if !errors.nil?
         end
 
         blueprints
-
       end
     end
 
