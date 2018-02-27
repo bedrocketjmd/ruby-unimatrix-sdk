@@ -13,6 +13,9 @@ require 'unimatrix/serializer'
 
 require 'unimatrix/resource'
 require 'unimatrix/dynamic_resource'
+require 'unimatrix/blueprintable'
+require 'unimatrix/blueprint_operation'
+
 require 'unimatrix/realm'
 
 require 'unimatrix/error'
