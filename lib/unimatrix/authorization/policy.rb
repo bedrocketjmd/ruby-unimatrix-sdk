@@ -9,9 +9,6 @@ module Unimatrix::Authorization
     field :realm_uuid
     field :actions
 
-    has_one :resource
-    has_one :resource_server
-
   end
 
 end
