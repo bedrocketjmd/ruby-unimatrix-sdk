@@ -75,6 +75,15 @@ require 'unimatrix/authorization/resource'
 require 'unimatrix/authorization/resource_owner'
 require 'unimatrix/authorization/resource_server'
 
+# cartographer
+require 'unimatrix/cartographer/geographic_area'
+require 'unimatrix/cartographer/city'
+require 'unimatrix/cartographer/continent'
+require 'unimatrix/cartographer/country'
+require 'unimatrix/cartographer/realm'
+require 'unimatrix/cartographer/region'
+require 'unimatrix/cartographer/territory'
+
 # distributor
 require 'unimatrix/distributor/destination'
 require 'unimatrix/distributor/distribution'
