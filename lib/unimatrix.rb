@@ -82,6 +82,7 @@ require 'unimatrix/cartographer/continent'
 require 'unimatrix/cartographer/country'
 require 'unimatrix/cartographer/realm'
 require 'unimatrix/cartographer/region'
+require 'unimatrix/cartographer/region_geographic_area'
 require 'unimatrix/cartographer/territory'
 
 # distributor
