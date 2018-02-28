@@ -8,6 +8,7 @@ module Unimatrix::Cartographer
     field :updated_at
 
     has_many :regions
+    has_many :region_geographic_areas
     
   end
 
