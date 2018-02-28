@@ -24,10 +24,10 @@ module Unimatrix
           blueprint
         end
 
-        def build( attributes )
+        def build( attributes = {}, associations = {} )
           blueprint = find_blueprint( attributes[ 'type_name' ] ) rescue nil
           klass = build_typed_class( attributes, blueprint )
-          klass.new( attributes ) rescue nil
+          klass.new( attributes, associations ) rescue nil
         end
 
         def build_typed_class( attributes, blueprint )

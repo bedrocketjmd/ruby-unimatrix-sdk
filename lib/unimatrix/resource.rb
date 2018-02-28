@@ -26,8 +26,8 @@ module Unimatrix
         @descendants_by_type_name[ type_name ]
       end
 
-      def build( attributes = {} )
-        new( attributes )
+      def build( attributes = {}, associations = {} )
+        new( attributes, associations )
       end
 
       def field( name, options = {} )
