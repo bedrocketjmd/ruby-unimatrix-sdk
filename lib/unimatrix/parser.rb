@@ -69,7 +69,7 @@ module Unimatrix
         if resource_class.present?
           relations = name == self.name ?
             self.parse_associations( attributes ) : []
-          resource = resource_class.new( attributes, relations )
+          resource = resource_class.build( attributes, relations )
         end
 
       end
@@ -103,9 +103,8 @@ module Unimatrix
             resource_attributes[ 'type_name' ],
             options[ 'type_name' ]
           )
-
           if resource_class.present?
-             result = resource_class.new(
+             result = resource_class.build(
                resource_attributes,
                self.resource_associations_by( name, key )
              )
