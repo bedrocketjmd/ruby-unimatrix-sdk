@@ -68,6 +68,33 @@ module Unimatrix
       result
     end
 
+    def read_in_batches( batch_size, &block )
+      results = []
+      start = @parameters[ :offset ] || 0
+      total_limit = @parameters[ :count ] || 1
+
+      while results.size < total_limit
+        operation = self.limit( batch_size ).offset( start )
+        operation.read do | _result, _response |
+          result = _result
+          response = _response
+        end
+        
+        results << result
+        start += batch_size
+
+        if block_given?
+          case block.arity
+            when 0; yield
+            when 1; yield result
+            when 2; yield result, responses
+          end
+        end
+        break if result.nil? || result.size < batch_size 
+      end
+      results
+    end
+
     def write( node, objects, &block )
       result = nil
       Request.new.tap do | request |
