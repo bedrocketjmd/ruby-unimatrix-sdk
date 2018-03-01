@@ -2,18 +2,18 @@ module Unimatrix
 
   class DynamicResource < Resource
 
-    class << self 
-      
+    class << self
+
       alias old_new new
-      
+
       def new( attributes = {}, associations = {} )
-        Class.new( self ).old_new( 
+        Class.new( self ).old_new(
           { type_name: self.name.split( '::' ).last.underscore }.
-            merge( attributes ), 
-          associations 
+            merge( attributes ),
+          associations
         )
       end
-      
+
     end
 
     def initialize( attributes = {}, associations = {} )
@@ -24,17 +24,17 @@ module Unimatrix
           unless self.respond_to?( key.to_sym )
       end
 
-      self.class_eval do 
+      self.class_eval do
         unsupported_attributes_names.each do | name |
-          field name 
+          field name
         end
       end
 
-      super( attributes, associations ) 
+      super( attributes, associations )
       yield self if block_given?
 
     end
 
   end
-  
+
 end

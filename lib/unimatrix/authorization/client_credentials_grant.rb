@@ -1,9 +1,9 @@
 require 'net/http'
 require 'json'
 
-module Unimatrix::Authorization 
+module Unimatrix::Authorization
   class ClientCredentialsGrant
-    
+
     def initialize( args )
       @client_id = args[ :client_id ]
       @client_secret = args[ :client_secret ]
