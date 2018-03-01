@@ -90,7 +90,7 @@ module Unimatrix
           case block.arity
             when 0; yield
             when 1; yield result
-            when 2; yield result, responses
+            when 2; yield result, response
           end
         end
         break if result.nil? || result.size < batch_size
