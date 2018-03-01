@@ -69,18 +69,21 @@ module Unimatrix
     end
 
     def read_in_batches( batch_size, &block )
-      results = []
+      total_limit = @parameters[ :count ]
       start = @parameters[ :offset ] || 0
-      total_limit = @parameters[ :count ] || 1
 
-      while results.size < total_limit
+      while total_limit.nil? || start + batch_size < total_limit
+        result = nil
+        response = nil
         operation = self.limit( batch_size ).offset( start )
+
         operation.read do | _result, _response |
           result = _result
           response = _response
         end
-        
-        results << result
+
+        unlimited_count = response.body[ '$this' ][ 'unlimited_count' ]
+        total_limit = unlimited_count if total_limit.nil? && !unlimited_count.nil?
         start += batch_size
 
         if block_given?
@@ -90,9 +93,8 @@ module Unimatrix
             when 2; yield result, responses
           end
         end
-        break if result.nil? || result.size < batch_size 
+        break if result.nil? || result.size < batch_size
       end
-      results
     end
 
     def write( node, objects, &block )
