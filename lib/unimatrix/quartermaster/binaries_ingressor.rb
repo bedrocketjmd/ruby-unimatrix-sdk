@@ -10,7 +10,8 @@ module Unimatrix::Quartermaster
     field      :updated_at
     field      :uuid
     field      :url
-
+    field      :realm_uuid
+    
   end
 
 end
