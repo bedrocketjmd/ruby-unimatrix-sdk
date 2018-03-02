@@ -98,6 +98,10 @@ require 'unimatrix/iris/stream_recorder'
 require 'unimatrix/iris/stream_transcriber'
 require 'unimatrix/iris/stream_transmutator'
 
+# regent
+require 'unimatrix/regent/realm'
+require 'unimatrix/regent/setting'
+
 # zephyrus
 require 'unimatrix/zephyrus/input'
 require 'unimatrix/zephyrus/output'
