@@ -12,6 +12,7 @@ module Unimatrix::Quartermaster
     field :properties
     field :uuid
     field :storage_key
+    field :realm_uuid
 
     has_one :binaries_ingressors
 
