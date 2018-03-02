@@ -116,4 +116,4 @@ require 'unimatrix/curator/source'
 
 # quartermaster
 require 'unimatrix/quartermaster/binary'
-require 'unimatrix/quartermaster/binaries_ingressor'
+require 'unimatrix/quartermaster/binary_ingressor'

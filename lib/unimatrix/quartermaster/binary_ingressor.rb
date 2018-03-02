@@ -1,6 +1,6 @@
 module Unimatrix::Quartermaster
 
-  class BinariesIngressor < Unimatrix::DynamicResource
+  class BinaryIngressor < Unimatrix::DynamicResource
 
     field      :id
     field      :binary_uuid
@@ -11,7 +11,7 @@ module Unimatrix::Quartermaster
     field      :uuid
     field      :url
     field      :realm_uuid
-    
+
   end
 
 end
