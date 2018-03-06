@@ -18,15 +18,17 @@ module Unimatrix
         )
         if object.respond_to?( :fields )
           object.fields.each do | name, options |
-            value = object.send( name ) if object.respond_to?( name )
-            if value.is_a?( Struct )
-              nested_attributes = value.members
-              nested_attributes.each do | nested_attribute |
-                key = "#{ name }.#{ nested_attribute }"
-                node_object[ key.to_sym ] = value.send( nested_attribute )
+            unless options[ :read_only ]
+              value = object.send( name ) if object.respond_to?( name )
+              if value.is_a?( Struct )
+                nested_attributes = value.members
+                nested_attributes.each do | nested_attribute |
+                  key = "#{ name }.#{ nested_attribute }"
+                  node_object[ key.to_sym ] = value.send( nested_attribute )
+                end
+              else
+                node_object[ name.to_sym ] = value
               end
-            else
-              node_object[ name.to_sym ] = value
             end
           end
         end

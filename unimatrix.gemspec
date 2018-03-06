@@ -7,8 +7,8 @@ Gem::Specification.new do | spec |
   spec.name          = "unimatrix"
   spec.version       = Unimatrix::VERSION
   spec.homepage      = "http://sportsrocket.com"
-  spec.authors       = [ "Jackson Souza" ]
-  spec.email         = [ "jackson@sportsrocket.com" ]
+  spec.authors       = [ "Product Team" ]
+  spec.email         = [ "product-services@sportsrocket.com" ]
   spec.summary       = "Unimatrix is used to communicate with Unimatrix APIs."
   spec.description   = "The unimatrix gem facilitates making requests to Unimatrix APIs."
   spec.license       = "MIT"
