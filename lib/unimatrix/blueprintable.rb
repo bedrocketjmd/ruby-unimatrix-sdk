@@ -25,6 +25,7 @@ module Unimatrix
         end
 
         def build( attributes = {}, associations = {} )
+          attributes = attributes.transform_keys( &:to_s )
           blueprint = find_blueprint( attributes[ 'type_name' ] ) rescue nil
           klass = build_typed_class( attributes, blueprint )
           klass.new( attributes, associations ) rescue nil

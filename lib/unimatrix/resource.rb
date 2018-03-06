@@ -27,7 +27,7 @@ module Unimatrix
       end
 
       def build( attributes = {}, associations = {} )
-        new( attributes, associations )
+        new( attributes.transform_keys( &:to_s ), associations )
       end
 
       def field( name, options = {} )
