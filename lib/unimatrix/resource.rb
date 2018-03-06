@@ -49,7 +49,9 @@ module Unimatrix
                       "'#{ options[ :default ] }'" :
                         "#{ options[ :default ] }" ) ) + ");" +
           "end;" +
-          " " +
+          "" +
+          options[ :read_only ] ?
+            '' :
           "attr_writer :#{ name };",
           __FILE__,
           __LINE__
