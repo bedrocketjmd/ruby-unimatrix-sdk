@@ -7,9 +7,8 @@ module Unimatrix::Quartermaster
     field :content_length
     field :content_type
     field :realm_uuid
-    field :created_at
-    field :updated_at
-    field :properties
+    field :created_at,  read_only: true
+    field :updated_at,  read_only: true
     field :uuid
     field :storage_key
 
