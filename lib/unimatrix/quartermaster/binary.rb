@@ -11,7 +11,7 @@ module Unimatrix::Quartermaster
     field :uuid
     field :storage_key
 
-    has_one :binaries_ingressor
+    has_one :binary_ingressor
 
   end
 
