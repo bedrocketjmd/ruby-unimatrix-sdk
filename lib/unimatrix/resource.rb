@@ -38,7 +38,6 @@ module Unimatrix
         end
 
         self.fields[ name.to_sym ] = options.merge( name: name )
-
         class_eval(
           "def #{ name }(); " +
           "@#{ name }.is_a?( FalseClass ) ? @#{ name } : (" +
