@@ -1,6 +1,6 @@
 module Unimatrix::Quartermaster
 
-  class Binary < Unimatrix::DynamicResource
+  class Binary < Unimatrix::Resource
 
     field :filename
     field :content_length
