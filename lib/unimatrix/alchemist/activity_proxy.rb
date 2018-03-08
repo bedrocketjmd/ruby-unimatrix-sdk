@@ -1,6 +1,6 @@
 module Unimatrix::Alchemist
 
-  class ActivityProxy < Unimatrix::DynamicResource
+  class ActivityProxy < Unimatrix::Resource
 
     field :id
     field :uuid

@@ -1,6 +1,6 @@
 module Unimatrix::Iris
 
-  class StreamEncoder < Unimatrix::DynamicResource
+  class StreamEncoder < Unimatrix::Resource
 
     field :id
     field :created_at

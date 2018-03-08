@@ -1,6 +1,6 @@
 module Unimatrix::Iris
 
-  class StreamTransmutator < Unimatrix::DynamicResource
+  class StreamTransmutator < Unimatrix::Resource
 
     field :id
     field :created_at

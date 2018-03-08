@@ -1,6 +1,6 @@
 module Unimatrix::Alchemist
 
-  class VideoEncoder < Unimatrix::DynamicResource
+  class VideoEncoder < Unimatrix::Resource
 
     field :id
     field :uuid

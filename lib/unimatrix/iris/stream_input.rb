@@ -1,6 +1,6 @@
 module Unimatrix::Iris
 
-  class StreamInput < Unimatrix::DynamicResource
+  class StreamInput < Unimatrix::Resource
 
     field :id
     field :created_at
