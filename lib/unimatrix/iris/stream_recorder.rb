@@ -1,6 +1,6 @@
 module Unimatrix::Iris
 
-  class StreamRecorder < Unimatrix::DynamicResource
+  class StreamRecorder < Unimatrix::Resource
 
     field :id
     field :created_at

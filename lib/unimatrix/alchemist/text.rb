@@ -1,6 +1,6 @@
 module Unimatrix::Alchemist
 
-  class Text < Unimatrix::DynamicResource
+  class Text < Unimatrix::Resource
 
     field :id
     field :uuid
