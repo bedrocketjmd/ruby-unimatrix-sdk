@@ -1,6 +1,6 @@
 module Unimatrix::Alchemist
 
-  class RenditionProfile < Unimatrix::DynamicResource
+  class RenditionProfile < Unimatrix::Resource
 
     field :id
     field :uuid

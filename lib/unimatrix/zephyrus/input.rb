@@ -1,6 +1,6 @@
 module Unimatrix::Zephyrus
   
-  class Input < Unimatrix::DynamicResource
+  class Input < Unimatrix::Resource
     
     field :id
     field :created_at

@@ -1,6 +1,6 @@
 module Unimatrix::Zephyrus
 
-  class Output < Unimatrix::DynamicResource
+  class Output < Unimatrix::Resource
 
     field :id
     field :created_at
