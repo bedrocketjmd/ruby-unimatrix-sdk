@@ -54,6 +54,9 @@ require 'unimatrix/alchemist/video_rendition'
 require 'unimatrix/alchemist/video_sprite_activity_proxy'
 require 'unimatrix/alchemist/video_storage_interrogation_picture_activity_proxy'
 
+# analyst
+require 'unimatrix/analyst/rule'
+
 # archivist
 require 'unimatrix/archivist/artifact'
 require 'unimatrix/archivist/artifact_locator'
