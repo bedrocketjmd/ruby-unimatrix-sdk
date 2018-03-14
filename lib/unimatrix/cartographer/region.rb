@@ -5,13 +5,13 @@ module Unimatrix::Cartographer
     field :id
     field :uuid
     field :name
-    field :realm_id
+    field :realm_uuid
     field :created_at
     field :updated_at
 
     has_many :geographic_areas
     has_many :region_geographic_areas
-    
+
   end
 
 end
