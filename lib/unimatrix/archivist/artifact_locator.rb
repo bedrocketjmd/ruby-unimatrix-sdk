@@ -1,6 +1,6 @@
 module Unimatrix::Archivist
 
-  class ArtifactLocator < Unimatrix::DynamicResource
+  class ArtifactLocator < Unimatrix::Resource
     
     field      :id
     field      :uuid

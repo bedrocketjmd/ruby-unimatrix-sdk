@@ -1,6 +1,6 @@
 module Unimatrix::Archivist
 
-  class ArtifactRelationship < Unimatrix::DynamicResource
+  class ArtifactRelationship < Unimatrix::Resource
     
     field    :id
     field    :uuid

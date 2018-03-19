@@ -1,6 +1,6 @@
 module Unimatrix::Archivist
 
-  class BlueprintAttribute < Unimatrix::DynamicResource
+  class BlueprintAttribute < Unimatrix::Resource
 
     field    :id
     field     :uuid

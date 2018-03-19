@@ -24,7 +24,8 @@ module Unimatrix
                 nested_attributes = value.members
                 nested_attributes.each do | nested_attribute |
                   key = "#{ name }.#{ nested_attribute }"
-                  node_object[ key.to_sym ] = value.send( nested_attribute )
+                  nested_attribute_value = value.send( nested_attribute )
+                  node_object[ key.to_sym ] = value.send( nested_attribute ) if value.send( nested_attribute )
                 end
               else
                 node_object[ name.to_sym ] = value

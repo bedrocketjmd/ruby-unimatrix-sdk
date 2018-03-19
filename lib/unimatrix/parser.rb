@@ -95,21 +95,22 @@ module Unimatrix
 
         result = nil
         resource_attributes = resource_attribute_index[ name ][ key ]
-
-        if resource_attributes.present?
-          parse_nested_attributes( resource_attributes )
-
-          resource_class = find_resource_class_by_type_name(
-            resource_attributes[ 'type_name' ],
-            options[ 'type_name' ]
-          )
-          if resource_class.present?
-             result = resource_class.build(
-               resource_attributes,
-               self.resource_associations_by( name, key )
-             )
+        
+          if resource_attributes.present?
+            
+            parse_nested_attributes( resource_attributes )
+            
+            resource_class = find_resource_class_by_type_name(
+              resource_attributes[ 'type_name' ],
+              options[ 'type_name' ]
+            )
+            if resource_class.present?
+              result = resource_class.build(
+                resource_attributes,
+                self.resource_associations_by( name, key )
+              )
+            end
           end
-        end
 
         # unlock the resource index for this name/key combination
         @resource_index_mutex[ name ].delete( key )
@@ -127,7 +128,7 @@ module Unimatrix
       end
       resource_class
     end
-
+    
     def resource_associations_by( name, key )
       result = Hash.new { | hash, key | hash[ key ] = [] }
       associations = self.associations
