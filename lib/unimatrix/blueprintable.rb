@@ -11,23 +11,16 @@ module Unimatrix
         cattr_accessor :blueprints
 
         def find_blueprint( class_type_name )
-          blueprint = nil
-
-          self.blueprints.each do | b |
-            if ( b.resource_type_name == class_type_name ) &&
-               ( blueprint.nil? || blueprint.realm_uuid.nil? )
-
-              blueprint = b
-            end
+          self.blueprints.detect do | blueprint |
+            blueprint.resource_type_name == class_type_name
           end
-
-          blueprint
         end
 
-        def build( attributes )
+        def build( attributes = {}, associations = {} )
+          attributes = attributes.transform_keys( &:to_s )
           blueprint = find_blueprint( attributes[ 'type_name' ] ) rescue nil
           klass = build_typed_class( attributes, blueprint )
-          klass.new( attributes ) rescue nil
+          klass.new( attributes, associations ) rescue nil
         end
 
         def build_typed_class( attributes, blueprint )
