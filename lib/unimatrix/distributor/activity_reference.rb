@@ -1,6 +1,6 @@
 module Unimatrix::Distributor
 
-  class ActivityReference < Unimatrix::DynamicResource
+  class ActivityReference < Unimatrix::Resource
     field    :id
     field    :type_name
     field    :subject_uuid
