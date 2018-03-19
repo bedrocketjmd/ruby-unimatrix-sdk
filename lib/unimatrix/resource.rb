@@ -1,5 +1,3 @@
-require 'pry'
-require 'pry-nav'
 module Unimatrix
 
   class Resource
