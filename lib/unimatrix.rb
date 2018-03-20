@@ -114,7 +114,6 @@ require 'unimatrix/zephyrus/routing_output'
 require 'unimatrix/zephyrus/transcoding_output'
 require 'unimatrix/zephyrus/transcoding_rendition'
 require 'unimatrix/zephyrus/transcribing_output'
-require 'unimatrix/zephyrus/transcribing_rendition'
 require 'unimatrix/zephyrus/transmutation_output'
 require 'unimatrix/zephyrus/transmutation_rendition'
 

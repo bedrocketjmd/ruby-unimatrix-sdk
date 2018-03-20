@@ -3,8 +3,9 @@ module Unimatrix
   class Resource
 
     class << self
-
-      def inherited( subclass )
+      
+      def inherited( subclass ) 
+        @@descendants_by_type_name = nil 
         subclass.nested_fields = {}.merge( self.nested_fields )
         subclass.fields = {}.merge( self.fields )
       end
@@ -14,7 +15,7 @@ module Unimatrix
       end
 
       def find_by_type_name( type_name )
-        @descendants_by_type_name = begin
+        @@descendants_by_type_name ||= begin
           result = {}
           descendants.each do | descendant |
             descendant_type_name = descendant.type_name
@@ -23,11 +24,11 @@ module Unimatrix
           end
           result
         end
-        @descendants_by_type_name[ type_name ]
+        @@descendants_by_type_name[ type_name ]
       end
 
-      def build( attributes = {} )
-        new( attributes )
+      def build( attributes = {}, associations = {} )
+        new( attributes.transform_keys( &:to_s ), associations )
       end
 
       def field( name, options = {} )
