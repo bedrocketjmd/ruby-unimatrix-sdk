@@ -6,7 +6,7 @@ module Unimatrix::Authorization
     attr_reader :body
     attr_reader :resources
 
-    def initialize( http_response )
+    def initialize( http_response, resource_name=nil )
       @success        = http_response.is_a?( Net::HTTPOK )
       @code           = http_response.code
       @resources      = []

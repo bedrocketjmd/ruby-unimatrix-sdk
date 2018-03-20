@@ -69,6 +69,7 @@ require 'unimatrix/authorization/parser'
 require 'unimatrix/authorization/request'
 require 'unimatrix/authorization/response'
 require 'unimatrix/authorization/filters/requires_policies' if defined?( Rails )
+require 'unimatrix/authorization/filters/requires_resource_owner' if defined?( Rails )
 require 'unimatrix/authorization/railtie' if defined?( Rails )
 require 'unimatrix/authorization/client_credentials_grant'
 require 'unimatrix/authorization/policy'

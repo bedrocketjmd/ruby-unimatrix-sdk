@@ -22,6 +22,9 @@ module Unimatrix::Authorization
         if @content[ 'error' ]
           result = parse_resource( name, @content )
         else
+          unless @content[ name ].is_a?( Array )
+            @content[ name ] = [ @content[ name ] ]
+          end
           result = @content[ name ].map do | attributes |
             self.parse_resource( name, attributes )
           end
@@ -39,6 +42,8 @@ module Unimatrix::Authorization
 
         if object_class.present?
           resource = object_class.new( attributes )
+        elsif attributes.is_a?( String )
+          resource = ResourceOwner.new( { "uuid" => attributes } )
         end
       end
       resource
