@@ -14,7 +14,7 @@ Gem::Specification.new do | spec |
   spec.license       = "MIT"
 
   spec.require_paths = [ "lib" ]
-  spec.files         = Dir.glob( "{lib}/**/*" )
+  spec.files         = [ 'VERSION' ] + Dir.glob( "{lib}/**/*" )
 
   spec.add_runtime_dependency( "activesupport", ">= 4.2" )
   spec.add_runtime_dependency( "addressable" )
