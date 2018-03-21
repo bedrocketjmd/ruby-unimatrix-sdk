@@ -1,4 +1,3 @@
-require 'pry'
 module Unimatrix
   VERSION = begin
     version = File.read( File.join( __dir__, "../../VERSION" ) )
