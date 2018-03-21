@@ -42,7 +42,8 @@ module Unimatrix::Authorization
 
         if object_class.present?
           resource = object_class.new( attributes )
-        elsif attributes.is_a?( String )
+        elsif name == 'uuid' && attributes.is_a?( String )
+          binding.pry
           resource = ResourceOwner.new( { "uuid" => attributes } )
         end
       end
