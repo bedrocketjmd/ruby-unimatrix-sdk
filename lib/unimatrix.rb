@@ -94,6 +94,7 @@ require 'unimatrix/distributor/distribution'
 
 # iris
 require 'unimatrix/iris/stream'
+require 'unimatrix/iris/stream_converter'
 require 'unimatrix/iris/stream_encoder'
 require 'unimatrix/iris/stream_input'
 require 'unimatrix/iris/stream_output'
