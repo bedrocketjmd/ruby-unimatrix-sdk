@@ -3,9 +3,10 @@ module Unimatrix::Cartographer
   class RegionGeographicArea < Unimatrix::DynamicResource
 
     field :id
-    field :realm_id
-    field :region_id
-    field :geographic_area_id
+    field :uuid
+    field :realm_uuid
+    field :region_uuid
+    field :geographic_area_uuid
     field :created_at
     field :updated_at
     
