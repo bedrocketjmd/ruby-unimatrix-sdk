@@ -1,6 +1,6 @@
 module Unimatrix::Authorization
 
-  class Policy < Unimatrix::DynamicResource
+  class Policy < Unimatrix::Resource
 
     field :id
     field :created_at
