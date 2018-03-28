@@ -1,6 +1,6 @@
 module Unimatrix::Authorization
 
-  class ResourceServer < Unimatrix::DynamicResource
+  class ResourceServer < Unimatrix::Resource
 
     field :id
     field :uuid
