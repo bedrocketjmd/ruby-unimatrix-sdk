@@ -9,7 +9,7 @@ module Unimatrix::Authorization
     end
 
     def name
-      @request_path[ 1..@request_path.length ]
+      @request_path[ 1...@request_path.length ]
     end
 
     def type_name
@@ -21,7 +21,7 @@ module Unimatrix::Authorization
 
       unless self.name.blank?
         if @content[ 'error' ]
-          result = parse_resource( name, @content )
+          result = parse_resource( 'error', @content )
         else
           unless @content[ name ].is_a?( Array )
             result = [ parse_resource( name, @content ) ]
