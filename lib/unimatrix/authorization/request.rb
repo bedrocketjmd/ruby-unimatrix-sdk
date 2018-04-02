@@ -19,7 +19,8 @@ module Unimatrix::Authorization
 
       begin
         response = Response.new(
-          @http.get( compose_request_path( path, parameters ) )
+          @http.get( compose_request_path( path, parameters ) ),
+          path
         )
       rescue Timeout::Error
         response = nil
@@ -38,7 +39,7 @@ module Unimatrix::Authorization
         )
         request.body = body.to_json
 
-        response = Response.new( @http.request( request ) )
+        response = Response.new( @http.request( request ), path )
       rescue Timeout::Error
         response = nil
       end
