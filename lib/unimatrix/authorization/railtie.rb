@@ -10,17 +10,26 @@ module Unimatrix::Authorization
 
   def retrieve_policies( resource_name, access_token, realm_uuid, resource_server )
     if resource_name && access_token
-      key = params.respond_to?( 'to_unsafe_h' ) ? 
-            params.to_unsafe_h.sort.to_s : 
-            params.sort.to_s
-            
+      key = [ resource_name, access_token, realm_uuid, resource_server ].join
+
       Rails.cache.fetch(
-        Digest::SHA1.hexdigest( key ),
+        "keymaker-policies-#{ Digest::SHA1.hexdigest( key ) }",
         expires_in: 1.minute
       ) do
         request_policies( resource_name, access_token, realm_uuid, resource_server )
       end
     end
   end
-  
+
+  def retrieve_resource_owner( access_token )
+    if access_token
+      Rails.cache.fetch(
+        "keymaker-resource_owner-#{ Digest::SHA1.hexdigest( access_token ) }",
+        expires_in: 1.minute
+      ) do
+        request_resource_owner( access_token )
+      end
+    end
+  end
+
 end

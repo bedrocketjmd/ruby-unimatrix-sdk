@@ -6,7 +6,7 @@ module Unimatrix::Authorization
       access_token = controller.params[ 'access_token' ]
 
       if access_token.present?
-        resource_owner = controller.request_resource_owner( access_token )
+        resource_owner = controller.retrieve_resource_owner( access_token )
 
         if resource_owner.present? && resource_owner.is_a?( Array ) &&
            resource_owner.first.type_name == 'resource_owner'
@@ -45,16 +45,19 @@ module Unimatrix::Authorization
 
   def resource_owner
     @resource_owner ||= begin
-      request_resource_owner( params[ :access_token ] )
+      retrieve_resource_owner( params[ :access_token ] )
+    end
+  end
+
+  # In Rails app, this is overwritten by #retrieve_resource_owner in railtie.rb
+  def retrieve_resource_owner( access_token )
+    if access_token
+      request_resource_owner( access_token )
     end
   end
 
   def request_resource_owner( access_token )
-    if access_token
-      Operation.new( '/resource_owner' ).where(
-        access_token: access_token
-      ).read
-    end
+    Operation.new( '/resource_owner' ).where( access_token: access_token ).read
   end
 
 end
