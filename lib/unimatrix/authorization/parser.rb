@@ -2,13 +2,14 @@ module Unimatrix::Authorization
 
   class Parser
 
-    def initialize( content = {} )
+    def initialize( content = {}, request_path = "" )
       @content = content
+      @request_path = request_path
       yield self if block_given?
     end
 
     def name
-      @content.keys.present? ? @content.keys.first : nil
+      @request_path[ 1...@request_path.length ]
     end
 
     def type_name
@@ -20,10 +21,14 @@ module Unimatrix::Authorization
 
       unless self.name.blank?
         if @content[ 'error' ]
-          result = parse_resource( name, @content )
+          result = parse_resource( 'error', @content )
         else
-          result = @content[ name ].map do | attributes |
-            self.parse_resource( name, attributes )
+          unless @content[ name ].is_a?( Array )
+            result = [ parse_resource( name, @content ) ]
+          else
+            result = @content[ name ].map do | attributes |
+              parse_resource( name, attributes )
+            end
           end
         end
       end
@@ -43,7 +48,7 @@ module Unimatrix::Authorization
       end
       resource
     end
-    
+
   end
 
 end

@@ -1,5 +1,5 @@
 module Unimatrix::Authorization
-  
+
   class RequiresPolicies
     def initialize( resource, options = {} )
       @resource_name = resource
@@ -8,8 +8,8 @@ module Unimatrix::Authorization
 
     def before( controller )
       access_token = controller.params[ 'access_token' ]
-      
-      realm_uuid = begin 
+
+      realm_uuid = begin
         if controller.respond_to?( :realm_uuid )
           controller.realm_uuid
         elsif controller.respond_to?( :realm )
@@ -20,11 +20,11 @@ module Unimatrix::Authorization
       end
 
       if access_token.present?
-        policies = controller.retrieve_policies( 
-          @resource_name, 
-          access_token, 
-          realm_uuid, 
-          @resource_server 
+        policies = controller.retrieve_policies(
+          @resource_name,
+          access_token,
+          realm_uuid,
+          @resource_server
         )
 
         if policies.present? && policies.is_a?( Array ) &&
@@ -50,10 +50,10 @@ module Unimatrix::Authorization
           )
         end
       else
-        controller.render_error( 
+        controller.render_error(
           ::MissingParameterError,
           "The parameter 'access_token' is required."
-        ) 
+        )
       end
     end
   end
@@ -78,11 +78,11 @@ module Unimatrix::Authorization
   def policies
     @policies ||= begin
       # Used by Archivist requires_permission filter. TODO: deprecate
-      retrieve_policies( 
-        @resource_name, 
-        params[ :access_token ], 
+      retrieve_policies(
+        @resource_name,
+        params[ :access_token ],
         realm_uuid,
-        @resource_server 
+        @resource_server
       )
     end
   end
@@ -90,11 +90,11 @@ module Unimatrix::Authorization
   # In Rails app, this is overwritten by #retrieve_policies in railtie.rb
   def retrieve_policies( resource_name, access_token, realm_uuid, resource_server )
     if resource_name && access_token
-      request_policies( 
-        resource_name, 
-        access_token, 
-        realm_uuid, 
-        resource_server 
+      request_policies(
+        resource_name,
+        access_token,
+        realm_uuid,
+        resource_server
       )
     end
   end
