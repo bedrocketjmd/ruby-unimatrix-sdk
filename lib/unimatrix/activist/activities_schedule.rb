@@ -8,7 +8,7 @@ module Unimatrix::Activist
     field :hour
     field :day
     field :month
-    field :expires_at, read_only: true
+    field :expires_at
     field :created_at, read_only: true
     field :updated_at, read_only: true
 
