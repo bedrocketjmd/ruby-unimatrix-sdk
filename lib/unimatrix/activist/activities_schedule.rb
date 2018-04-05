@@ -8,9 +8,9 @@ module Unimatrix::Activist
     field :hour
     field :day
     field :month
-    field :expires_at
-    field :created_at
-    field :updated_at
+    field :expires_at, read_only: true
+    field :created_at, read_only: true
+    field :updated_at, read_only: true
 
     has_one  :realm
     has_many :activities

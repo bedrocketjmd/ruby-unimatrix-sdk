@@ -6,10 +6,10 @@ module Unimatrix::Regent
     field    :uuid
     field    :name
     field    :code_name
-    field    :created_at
-    field    :updated_at
     field    :domain_name
     field    :picture_uuid
+    field    :created_at,  read_only: true
+    field    :updated_at,  read_only: true
 
     has_many :settings
 

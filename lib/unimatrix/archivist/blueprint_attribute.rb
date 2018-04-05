@@ -2,7 +2,7 @@ module Unimatrix::Archivist
 
   class BlueprintAttribute < Unimatrix::Resource
 
-    field    :id
+    field     :id
     field     :uuid
     field     :realm_uuid
     field     :blueprint_uuid
@@ -25,8 +25,8 @@ module Unimatrix::Archivist
     field     :validates_numeric_minimum
     field     :validates_numeric_maximum
     field     :validates_type
-    field     :created_at
-    field     :updated_at
+    field     :created_at,                read_only: true
+    field     :updated_at,                read_only: true
 
     has_many :errors
 

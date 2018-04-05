@@ -13,8 +13,8 @@ module Unimatrix::Activist
     field   :execute_at
     field   :started_at
     field   :ended_at
-    field   :created_at
-    field   :updated_at
+    field   :created_at, read_only: true
+    field   :updated_at, read_only: true
 
     has_one :activity
     

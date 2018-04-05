@@ -14,7 +14,6 @@ module Unimatrix::Archivist
     field    :short_description
     field    :short_name
     field    :originated_at
-    field    :destroyed_at
     field    :slug
     field    :note
     field    :type_name
@@ -24,8 +23,9 @@ module Unimatrix::Archivist
     field    :component_uuids
     field    relationships: [ :category, :person, :season, :asset, :athlete ]
     field    :name
-    field    :created_at
-    field    :updated_at
+    field    :created_at,   read_only: true
+    field    :updated_at,   read_only: true
+    field    :destroyed_at, read_only: true
 
     has_many :artifact_locators
     has_many :artifact_relationships

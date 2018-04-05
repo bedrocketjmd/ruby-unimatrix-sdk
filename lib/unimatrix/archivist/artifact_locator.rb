@@ -7,12 +7,12 @@ module Unimatrix::Archivist
     field      :provider
     field      :type_name
     field      :realm_uuid
-    field      :created_at
-    field      :updated_at
     field      :artifact_uuid
     field      :provider_url
     field      :provider_uid
-    field      :destroyed_at
+    field      :created_at,   read_only: true
+    field      :updated_at,   read_only: true
+    field      :destroyed_at, read_only: true
     
     has_one  :artifact
     has_many :errors

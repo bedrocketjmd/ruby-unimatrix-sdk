@@ -9,11 +9,11 @@ module Unimatrix::Distributor
     field    :message
     field    :properties
     field    :distribution_uuid
-    field    :completed_at
-    field    :destroyed_at
-    field    :created_at
-    field    :updated_at
     field    :execute_at
+    field    :completed_at
+    field    :created_at,   read_only: true
+    field    :updated_at,   read_only: true
+    field    :destroyed_at, read_only: true
 
     has_one  :realm
   end

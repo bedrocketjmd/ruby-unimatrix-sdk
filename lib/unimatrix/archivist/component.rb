@@ -6,8 +6,8 @@ module Unimatrix::Archivist
     field    :uuid
     field    :realm_uuid
     field    :type_name
-    field    :created_at
-    field    :updated_at
+    field    :created_at, read_only: true
+    field    :updated_at, read_only: true
     
     has_one  :artifact
     has_many :errors

@@ -6,8 +6,8 @@ module Unimatrix::Regent
     field   :realm_id
     field   :name
     field   :content
-    field   :created_at
-    field   :updated_at
+    field   :created_at, read_only: true
+    field   :updated_at, read_only: true
 
   end
 

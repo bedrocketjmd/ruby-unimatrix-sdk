@@ -9,8 +9,8 @@ module Unimatrix::Archivist
     field    :name
     field    :resource_class_name
     field    :resource_type_name
-    field    :created_at
-    field    :updated_at
+    field    :created_at,         read_only: true
+    field    :updated_at,         read_only: true
     
     has_many :blueprint_attributes
     has_many :errors

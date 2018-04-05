@@ -10,9 +10,9 @@ module Unimatrix::Curator
     field   :time_to_live
     field   :last_polled_at
     field   :state
-    field   :created_at
-    field   :destroyed_at
-    field   :updated_at
+    field   :created_at,   read_only: true
+    field   :updated_at,   read_only: true
+    field   :destroyed_at, read_only: true
 
     has_many :activities
     has_one  :realm
