@@ -91,6 +91,9 @@ require 'unimatrix/cartographer/territory'
 require 'unimatrix/distributor/destination'
 require 'unimatrix/distributor/distribution'
 
+# historian
+require 'unimatrix/historian/history'
+
 # iris
 require 'unimatrix/iris/stream'
 require 'unimatrix/iris/stream_converter'
