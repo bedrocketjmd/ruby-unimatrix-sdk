@@ -22,6 +22,7 @@ require 'unimatrix/bad_request_error'
 
 # errors
 require 'unimatrix/error'
+require 'unimatrix/authorization_error'
 require 'unimatrix/attribute_error'
 require 'unimatrix/bad_request_error'
 require 'unimatrix/forbidden_error'
