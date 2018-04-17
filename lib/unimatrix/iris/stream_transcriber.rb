@@ -8,7 +8,6 @@ module Unimatrix::Iris
     field :uuid
     field :state
     field :minimum_segment_duration
-    field :maximum_segment_duration
     field :stream_id
     field :stream_uuid
 
