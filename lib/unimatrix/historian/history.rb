@@ -1,6 +1,6 @@
 module Unimatrix::Historian
 
-  class History < Unimatrix::DynamicResource
+  class History < Unimatrix::Resource
     field    :id
     field    :uuid
     field    :realm_uuid
