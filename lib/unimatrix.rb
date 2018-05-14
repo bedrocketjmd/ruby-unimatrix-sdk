@@ -50,6 +50,7 @@ require 'unimatrix/alchemist/text_storage_activity_proxy'
 require 'unimatrix/alchemist/video_encoding_activity_proxy'
 require 'unimatrix/alchemist/video_picture_activity_proxy'
 require 'unimatrix/alchemist/video_rendition'
+require 'unimatrix/alchemist/video_rendition_interrogation_activity_proxy'
 require 'unimatrix/alchemist/video_sprite_activity_proxy'
 require 'unimatrix/alchemist/video_storage_interrogation_picture_activity_proxy'
 
