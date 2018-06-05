@@ -55,6 +55,13 @@ module Unimatrix
       response = nil
       Request.new.tap do | request |
         request.get( @path, @parameters ).tap do | response |
+          if response.resources.empty?
+            logger.error( 
+              "Path: #{ @path }\n" + 
+              "Parameters: #{ @parameters.inspect }\n" +
+              "Response: #{ response.inspect }"
+            )
+          end
           result = response.resources
           if block_given?
             case block.arity
