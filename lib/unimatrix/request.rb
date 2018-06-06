@@ -51,7 +51,7 @@ module Unimatrix
           response = nil
         end
 
-        if retry_response_codes.include?( response.code )   
+        if response.is_a?( Response ) && retry_response_codes.include?( response.code )   
           retry_count += 1
         else 
           break
@@ -86,7 +86,7 @@ module Unimatrix
           response = nil
         end
         
-        if retry_response_codes.include?( response.code )   
+        if response.is_a?( Response ) && retry_response_codes.include?( response.code )   
           retry_count += 1
         else 
           break
