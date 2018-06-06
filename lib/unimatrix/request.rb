@@ -32,13 +32,31 @@ module Unimatrix
 
     def get( path, parameters = {} )
       response = nil
+      retry_count = 0
+      
+      retry_response_codes = [ 
+        "500", 
+        "502", 
+        "503", 
+        "504",
+      ]
 
-      begin
-        response = Response.new(
-          @http.get( compose_request_path( path, parameters ) )
-        )
-      rescue Timeout::Error
-        response = nil
+      while retry_count <= 5
+        begin
+          response = Response.new(
+            @http.get( compose_request_path( path, parameters ) )
+          )
+          
+        rescue Timeout::Error
+          response = nil
+        end
+
+        if retry_response_codes.include?( response.code )   
+          retry_count += 1
+        else 
+          break
+        end
+        
       end
 
       response
@@ -46,19 +64,36 @@ module Unimatrix
 
     def post( path, parameters = {}, body = {} )
       response = nil
+      retry_count = 0
+      
+      retry_response_codes = [ 
+        "500", 
+        "502", 
+        "503", 
+        "504",
+      ]
 
-      begin
-        request = Net::HTTP::Post.new(
-          compose_request_path( path, parameters ),
-          { 'Content-Type' =>'application/json' }
-        )
-        request.body = body.to_json
-
-        response = Response.new( @http.request( request ) )
-      rescue Timeout::Error
-        response = nil
+      while retry_count <= 5
+        begin
+          request = Net::HTTP::Post.new(
+            compose_request_path( path, parameters ),
+            { 'Content-Type' =>'application/json' }
+          )
+          request.body = body.to_json
+          
+          response = Response.new( @http.request( request ) )
+        rescue Timeout::Error
+          response = nil
+        end
+        
+        if retry_response_codes.include?( response.code )   
+          retry_count += 1
+        else 
+          break
+        end
+        
       end
-
+      
       response
     end
 
