@@ -41,7 +41,7 @@ module Unimatrix
         "504"
       ]
 
-      while retry_count <= 5
+      while retry_count <= 2
         begin
           response = Response.new(
             @http.get( compose_request_path( path, parameters ) )
@@ -73,7 +73,7 @@ module Unimatrix
         "504",
       ]
 
-      while retry_count <= 5
+      while retry_count <= 2
         begin
           request = Net::HTTP::Post.new(
             compose_request_path( path, parameters ),
