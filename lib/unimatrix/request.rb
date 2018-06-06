@@ -38,7 +38,7 @@ module Unimatrix
         "500", 
         "502", 
         "503", 
-        "504",
+        "504"
       ]
 
       while retry_count <= 5
