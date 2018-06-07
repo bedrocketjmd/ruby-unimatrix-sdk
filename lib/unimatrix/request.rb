@@ -16,84 +16,51 @@ module Unimatrix
     end
 
     def destroy( path, parameters = {} )
-
-      begin
+      attempt_request do
         request = Net::HTTP::Delete.new(
           compose_request_path( path, parameters ),
           { 'Content-Type' =>'application/json' }
         )
-        response = Response.new( @http.request( request ) )
-      rescue Timeout::Error
-        response = nil
-      end
 
-      response
+        Response.new( @http.request( request ) )
+      end
     end
 
     def get( path, parameters = {} )
-      response = nil
-      retry_count = 0
-      
-      retry_response_codes = [ 
-        "500", 
-        "502", 
-        "503", 
-        "504"
-      ]
-
-      while retry_count <= 2
-        begin
-          response = Response.new(
-            @http.get( compose_request_path( path, parameters ) )
-          )
-          
-        rescue Timeout::Error
-          response = nil
-        end
-
-        if response.is_a?( Response ) && retry_response_codes.include?( response.code )   
-          retry_count += 1
-        else 
-          break
-        end
-        
+      attempt_request do
+        Response.new(
+          @http.get( compose_request_path( path, parameters ) )
+        )
       end
-
-      response
     end
 
     def post( path, parameters = {}, body = {} )
-      response = nil
-      retry_count = 0
-      
-      retry_response_codes = [ 
-        "500", 
-        "502", 
-        "503", 
-        "504",
-      ]
+      attempt_request do
+        request = Net::HTTP::Post.new(
+          compose_request_path( path, parameters ),
+          { 'Content-Type' =>'application/json' }
+        )
+        request.body = body.to_json
 
-      while retry_count <= 2
-        begin
-          request = Net::HTTP::Post.new(
-            compose_request_path( path, parameters ),
-            { 'Content-Type' =>'application/json' }
-          )
-          request.body = body.to_json
-          
-          response = Response.new( @http.request( request ) )
-        rescue Timeout::Error
-          response = nil
-        end
-        
-        if response.is_a?( Response ) && retry_response_codes.include?( response.code )   
-          retry_count += 1
-        else 
-          break
-        end
-        
+        Response.new( @http.request( request ) )
       end
-      
+    end
+
+    protected; def attempt_request
+      response = nil
+      retry_codes = [ '500', '502', '503', '504' ]
+
+      3.times do
+        response =
+          begin
+            yield
+          rescue Timeout::Error
+            nil
+          end
+
+        break unless response.is_a?( Response ) && retry_codes.include?( response.code )
+      end
+
       response
     end
 
