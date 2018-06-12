@@ -20,6 +20,7 @@ module Unimatrix::Alchemist
     field :profile
     field :height
     field :width
+    field :rotation
     field :resolution
     field :bit_rate
     field :level
