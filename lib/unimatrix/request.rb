@@ -58,9 +58,7 @@ module Unimatrix
             error
           end
 
-        unless response.nil? ||
-               ( response.is_a?( Response ) && retry_codes.include?( response.code ) ) ||
-               !response.is_a?( Timeout::Error )
+        unless response.nil? || ( response.is_a?( Response ) && retry_codes.include?( response.code ) )
           
           response = nil if response.is_a?( Timeout::Error )
           
