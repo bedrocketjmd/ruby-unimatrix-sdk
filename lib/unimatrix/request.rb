@@ -54,11 +54,18 @@ module Unimatrix
         response =
           begin
             yield
-          rescue Timeout::Error
-            nil
+          rescue Timeout::Error => error
+            error
           end
 
-        break unless response.is_a?( Response ) && retry_codes.include?( response.code )
+        unless response.nil? ||
+               ( response.is_a?( Response ) && retry_codes.include?( response.code ) ) ||
+               !response.is_a?( Timeout::Error )
+          
+          response = nil if response.is_a?( Timeout::Error )
+          
+          break
+        end
       end
 
       response
