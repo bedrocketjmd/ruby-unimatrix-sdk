@@ -31,5 +31,18 @@ module Unimatrix::Authorization
       end
     end
   end
+  
+  def retrieve_client_token( client_id, client_secret )
+    if client_id && client_secret
+      key = [ client_id, client_secret ].join
+      
+      Rails.cache.fetch(
+        "keymaker-client_token-#{ Digest::SHA1.hexdigest( key ) }",
+        expires_in: 1.minute
+      ) do
+        request_client_token( client_id, client_secret )
+      end
+    end
+  end
 
 end

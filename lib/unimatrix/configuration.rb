@@ -31,6 +31,9 @@ module Unimatrix
     
     field :authorization_url,  default: ENV[ 'UNIMATRIX_AUTHORIZATION_API_URL' ] || 
                                         'http://us-west-2.keymaker.boxxspring.net'
+                                        
+    field :client_id,          default: ENV[ 'KEYMAKER_CLIENT' ]
+    field :client_secret,      default: ENV[ 'KEYMAKER_SECRET' ]
   end
 
 end
