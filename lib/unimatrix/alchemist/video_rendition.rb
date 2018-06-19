@@ -8,6 +8,7 @@ module Unimatrix::Alchemist
     field :pixel_format
     field :profile
     field :resolution
+    field :rotation
     field :bit_rate
     field :level
     field :frame_rate
