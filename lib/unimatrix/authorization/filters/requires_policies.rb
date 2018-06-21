@@ -99,6 +99,8 @@ module Unimatrix::Authorization
         realm_uuid,
         resource_server
       )
+    else
+      nil
     end
   end
 
@@ -109,6 +111,8 @@ module Unimatrix::Authorization
         access_token: access_token,
         resource: "realm/#{ realm_uuid }::#{ resource_server }::#{ resource_name }/*"
       ).read
+    else
+      nil
     end
   end
   
@@ -118,6 +122,8 @@ module Unimatrix::Authorization
         client_id: client_id,
         client_secret: client_secret
       ).request_token
+    else
+      nil
     end
   end
 

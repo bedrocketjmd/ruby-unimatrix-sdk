@@ -18,6 +18,8 @@ module Unimatrix::Authorization
       ) do
         request_policies( resource_name, access_token, realm_uuid, resource_server )
       end
+    else
+      nil
     end
   end
 
@@ -29,6 +31,8 @@ module Unimatrix::Authorization
       ) do
         request_resource_owner( access_token )
       end
+    else
+      nil
     end
   end
   
@@ -42,6 +46,8 @@ module Unimatrix::Authorization
       ) do
         request_client_token( client_id, client_secret )
       end
+    else
+      nil
     end
   end
 
