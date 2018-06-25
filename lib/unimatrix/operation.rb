@@ -104,6 +104,7 @@ module Unimatrix
     def write( node, objects, &block )
       result = nil
       Request.new.tap do | request |
+      
         serializer = Unimatrix::Serializer.new( objects )
         response = request.post( @path, @parameters, serializer.serialize( node ) )
         if response.present?
