@@ -16,47 +16,54 @@ module Unimatrix
     end
 
     def destroy( path, parameters = {} )
-
-      begin
+      attempt_request do
         request = Net::HTTP::Delete.new(
           compose_request_path( path, parameters ),
           { 'Content-Type' =>'application/json' }
         )
-        response = Response.new( @http.request( request ) )
-      rescue Timeout::Error
-        response = nil
-      end
 
-      response
+        Response.new( @http.request( request ) )
+      end
     end
 
     def get( path, parameters = {} )
-      response = nil
-
-      begin
-        response = Response.new(
+      attempt_request do
+        Response.new(
           @http.get( compose_request_path( path, parameters ) )
         )
-      rescue Timeout::Error
-        response = nil
       end
-
-      response
     end
 
     def post( path, parameters = {}, body = {} )
-      response = nil
-
-      begin
+      attempt_request do
         request = Net::HTTP::Post.new(
           compose_request_path( path, parameters ),
           { 'Content-Type' =>'application/json' }
         )
         request.body = body.to_json
 
-        response = Response.new( @http.request( request ) )
-      rescue Timeout::Error
-        response = nil
+        Response.new( @http.request( request ) )
+      end
+    end
+
+    protected; def attempt_request
+      response = nil
+      retry_codes = [ '500', '502', '503', '504' ]
+
+      3.times do
+        response =
+          begin
+            yield
+          rescue Timeout::Error => error
+            error
+          end
+
+        unless response.nil? || ( response.is_a?( Response ) && retry_codes.include?( response.code ) )
+          
+          response = nil if response.is_a?( Timeout::Error )
+          
+          break
+        end
       end
 
       response
