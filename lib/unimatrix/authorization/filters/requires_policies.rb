@@ -121,7 +121,7 @@ module Unimatrix::Authorization
       ClientCredentialsGrant.new(
         client_id: client_id,
         client_secret: client_secret
-      ).request_token
+      ).request_token( with_expiry: true )
     else
       nil
     end

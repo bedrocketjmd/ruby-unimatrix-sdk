@@ -38,14 +38,31 @@ module Unimatrix::Authorization
   
   def retrieve_client_token( client_id, client_secret )
     if client_id && client_secret
-      key = [ client_id, client_secret ].join
+      key        = [ client_id, client_secret ].join
+      expires_in = nil
       
-      Rails.cache.fetch(
+      token = Rails.cache.fetch(
         "keymaker-client_token-#{ Digest::SHA1.hexdigest( key ) }",
         expires_in: 1.minute
       ) do
-        request_client_token( client_id, client_secret )
+        token_hash = request_client_token( client_id, client_secret )
+        
+        if token_hash && token_hash[ :expires_in ] && token_hash[ :expires_in ] < 60
+          expires_in = token_hash[ :expires_in ]
+        end
+        
+        token_hash[ :access_token ] rescue nil
       end
+      
+      if expires_in
+        Rails.cache.write(
+          "keymaker-client_token-#{ Digest::SHA1.hexdigest( key ) }",
+          token,
+          expires_in: expires_in
+        )
+      end
+      
+      token
     else
       nil
     end
