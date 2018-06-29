@@ -2,14 +2,16 @@ module Unimatrix::Archivist
 
   class BlueprintAttribute < Unimatrix::Resource
 
-    field    :id
+    field     :id
     field     :uuid
     field     :realm_uuid
+    field     :type_name
     field     :blueprint_uuid
     field     :name
     field     :readable
     field     :writable
     field     :type
+    field     :allow_nil
     field     :validates_uniqueness
     field     :validates_uniqueness_scope
     field     :validates_presence
@@ -20,13 +22,11 @@ module Unimatrix::Archivist
     field     :validates_length_maximum
     field     :validates_in
     field     :validates_not_in
-    field     :validates_numeric
-    field     :validates_numeric_integer
     field     :validates_numeric_minimum
     field     :validates_numeric_maximum
-    field     :validates_type
     field     :created_at
     field     :updated_at
+    field     :destroyed_at
 
     has_many :errors
 
