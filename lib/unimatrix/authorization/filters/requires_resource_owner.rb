@@ -3,7 +3,10 @@ module Unimatrix::Authorization
   class RequiresResourceOwner
 
     def before( controller )
-      access_token = controller.params[ 'access_token' ]
+      client_id     = Unimatrix.configuration.client_id
+      client_secret = Unimatrix.configuration.client_secret
+      access_token  = controller.params[ 'access_token' ] || \
+                      controller.retrieve_client_token( client_id, client_secret )
 
       if access_token.present?
         resource_owner = controller.retrieve_resource_owner( access_token )

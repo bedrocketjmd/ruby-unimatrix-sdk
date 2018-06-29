@@ -18,6 +18,8 @@ module Unimatrix::Authorization
       ) do
         request_policies( resource_name, access_token, realm_uuid, resource_server )
       end
+    else
+      nil
     end
   end
 
@@ -29,6 +31,40 @@ module Unimatrix::Authorization
       ) do
         request_resource_owner( access_token )
       end
+    else
+      nil
+    end
+  end
+  
+  def retrieve_client_token( client_id, client_secret )
+    if client_id && client_secret
+      key        = [ client_id, client_secret ].join
+      expires_in = nil
+      
+      token = Rails.cache.fetch(
+        "keymaker-client_token-#{ Digest::SHA1.hexdigest( key ) }",
+        expires_in: 1.minute
+      ) do
+        token_hash = request_client_token( client_id, client_secret )
+        
+        if token_hash && token_hash[ :expires_in ] && token_hash[ :expires_in ] < 60
+          expires_in = token_hash[ :expires_in ]
+        end
+        
+        token_hash[ :access_token ] rescue nil
+      end
+      
+      if expires_in
+        Rails.cache.write(
+          "keymaker-client_token-#{ Digest::SHA1.hexdigest( key ) }",
+          token,
+          expires_in: expires_in
+        )
+      end
+      
+      token
+    else
+      nil
     end
   end
 
