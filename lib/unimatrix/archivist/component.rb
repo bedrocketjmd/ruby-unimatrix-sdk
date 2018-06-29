@@ -1,6 +1,6 @@
 module Unimatrix::Archivist
 
-  class Component < Unimatrix::DynamicResource
+  class Component < Unimatrix::Resource
 
     field    :id
     field    :uuid
