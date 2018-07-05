@@ -1,7 +1,7 @@
 module Unimatrix::Archivist
 
   class Blueprint < Unimatrix::Resource
-    
+
     field    :id
     field    :uuid
     field    :realm_uuid
@@ -11,7 +11,8 @@ module Unimatrix::Archivist
     field    :resource_type_name
     field    :created_at
     field    :updated_at
-    
+    field    :destroyed_at
+
     has_many :blueprint_attributes
     has_many :errors
 

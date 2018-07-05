@@ -7,7 +7,10 @@ module Unimatrix::Authorization
     end
 
     def before( controller )
-      access_token = controller.params[ 'access_token' ]
+      client_id     = Unimatrix.configuration.client_id
+      client_secret = Unimatrix.configuration.client_secret
+      access_token  = controller.params[ 'access_token' ] || \
+                      controller.retrieve_client_token( client_id, client_secret )
 
       realm_uuid = begin
         if controller.respond_to?( :realm_uuid )
@@ -96,6 +99,8 @@ module Unimatrix::Authorization
         realm_uuid,
         resource_server
       )
+    else
+      nil
     end
   end
 
@@ -106,6 +111,19 @@ module Unimatrix::Authorization
         access_token: access_token,
         resource: "realm/#{ realm_uuid }::#{ resource_server }::#{ resource_name }/*"
       ).read
+    else
+      nil
+    end
+  end
+  
+  def request_client_token( client_id, client_secret )
+    if client_id && client_secret
+      ClientCredentialsGrant.new(
+        client_id: client_id,
+        client_secret: client_secret
+      ).request_token( with_expiry: true )
+    else
+      nil
     end
   end
 
