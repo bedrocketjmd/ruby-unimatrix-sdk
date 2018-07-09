@@ -10,6 +10,7 @@ module Unimatrix::Alchemist
     field :bit_rate
     field :created_at
     field :updated_at
+    field :transcoder
 
     has_many :renditions
     has_many :activity_proxies
