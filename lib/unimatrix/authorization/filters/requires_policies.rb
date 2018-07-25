@@ -9,10 +9,15 @@ module Unimatrix::Authorization
     def before( controller )
       client_id     = Unimatrix.configuration.client_id
       client_secret = Unimatrix.configuration.client_secret
-      access_token  = controller.params[ 'access_token' ] || \
-                      controller.retrieve_client_token( client_id, client_secret )
 
-      realm_uuid = begin
+      access_token =
+        if controller.params[ 'access_token' ].present?
+          controller.params[ 'access_token' ]
+        else
+          controller.retrieve_client_token( client_id, client_secret )
+        end
+
+      realm_uuid =
         if controller.respond_to?( :realm_uuid )
           controller.realm_uuid
         elsif controller.respond_to?( :realm )
@@ -20,7 +25,6 @@ module Unimatrix::Authorization
         else
           controller.params[ :realm_uuid ]
         end
-      end
 
       if access_token.present?
         policies = controller.retrieve_policies(
@@ -41,22 +45,13 @@ module Unimatrix::Authorization
           end
 
           if forbidden
-            controller.render_error(
-              ::ForbiddenError,
-              "A policy permitting this action was not found."
-            )
+            controller.render_error( ::MissingPolicyError )
           end
         else
-          controller.render_error(
-            ::ForbiddenError,
-            "The requested policies could not be retrieved."
-          )
+          controller.render_error( ::MissingPolicyError )
         end
       else
-        controller.render_error(
-          ::MissingParameterError,
-          "The parameter 'access_token' is required."
-        )
+        controller.render_error( ::MissingTokenError )
       end
     end
   end
@@ -115,7 +110,7 @@ module Unimatrix::Authorization
       nil
     end
   end
-  
+
   def request_client_token( client_id, client_secret )
     if client_id && client_secret
       ClientCredentialsGrant.new(
