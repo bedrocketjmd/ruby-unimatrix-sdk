@@ -22,7 +22,7 @@ module Unimatrix::Archivist
     field    :note
     field    :legacy_id
     field    :legacy_uid
-    field    relationships: [ :category, :person, :season, :asset, :athlete ]
+    field    relationships: [ :category, :person, :season, :asset, :athlete, :service_provider ]
     field    :created_at
     field    :updated_at
     field    :originated_at

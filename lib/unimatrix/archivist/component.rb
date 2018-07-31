@@ -8,6 +8,7 @@ module Unimatrix::Archivist
     field    :type_name
     field    :created_at
     field    :updated_at
+    field    :artifact_uuid
     field    :destroyed_at
 
     has_one  :artifact

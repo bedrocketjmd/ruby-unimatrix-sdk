@@ -3,6 +3,7 @@ module Unimatrix::Regent
   class Setting < Unimatrix::Resource
 
     field   :id
+    field   :uuid
     field   :realm_id
     field   :name
     field   :content
