@@ -11,6 +11,9 @@ module Unimatrix::Quartermaster
     field :uuid
     field :storage_key
 
+    field :height
+    field :width
+
     has_one :binary_ingressor
 
   end

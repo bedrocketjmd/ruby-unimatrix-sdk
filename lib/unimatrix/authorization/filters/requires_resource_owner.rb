@@ -5,8 +5,13 @@ module Unimatrix::Authorization
     def before( controller )
       client_id     = Unimatrix.configuration.client_id
       client_secret = Unimatrix.configuration.client_secret
-      access_token  = controller.params[ 'access_token' ] || \
-                      controller.retrieve_client_token( client_id, client_secret )
+
+      access_token =
+        if controller.params[ 'access_token' ].present?
+          controller.params[ 'access_token' ]
+        else
+          controller.retrieve_client_token( client_id, client_secret )
+        end
 
       if access_token.present?
         resource_owner = controller.retrieve_resource_owner( access_token )
@@ -15,16 +20,10 @@ module Unimatrix::Authorization
            resource_owner.first.type_name == 'resource_owner'
           controller.resource_owner = resource_owner
         else
-          controller.render_error(
-            ::ForbiddenError,
-            "The requested resource_owner could not be retrieved."
-          )
+          controller.render_error( ::MissingPolicyError )
         end
       else
-        controller.render_error(
-          ::MissingParameterError,
-          "The parameter 'access_token' is required."
-        )
+        controller.render_error( ::MissingTokenError )
       end
     end
   end
