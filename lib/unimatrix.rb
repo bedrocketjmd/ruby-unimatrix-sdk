@@ -109,6 +109,7 @@ require 'unimatrix/iris/stream_input'
 require 'unimatrix/iris/stream_output'
 require 'unimatrix/iris/stream_recorder'
 require 'unimatrix/iris/stream_transcriber'
+require 'unimatrix/iris/stream_transformer'
 require 'unimatrix/iris/stream_transmutator'
 
 # regent
