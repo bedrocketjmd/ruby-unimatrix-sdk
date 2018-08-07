@@ -112,6 +112,11 @@ require 'unimatrix/iris/stream_transcriber'
 require 'unimatrix/iris/stream_transformer'
 require 'unimatrix/iris/stream_transmutator'
 
+# player
+require 'unimatrix/player/media'
+require 'unimatrix/player/media_source'
+require 'unimatrix/player/media_text'
+
 # regent
 require 'unimatrix/regent/realm'
 require 'unimatrix/regent/setting'
