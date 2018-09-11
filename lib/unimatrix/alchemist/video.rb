@@ -34,6 +34,7 @@ module Unimatrix::Alchemist
     field :audio_channel_layout
     field :audio_bit_rate
     field :audio_sample_rate
+    field :interrogation_status
 
     has_many :video_encoders
     has_many :renditions
