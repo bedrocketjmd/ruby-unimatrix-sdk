@@ -9,7 +9,7 @@ module Unimatrix
       uri   = URI( Unimatrix.configuration.url )
       @http = Net::HTTP.new( uri.host, uri.port )
       
-      timeout_limit = ENV[ 'TIMEOUT_LIMIT' ] ? ENV[ 'TIMEOUT_LIMIT' ].to_i : 60
+      timeout_limit = ( ENV[ 'TIMEOUT_LIMIT' ] || 60 ).to_i
       
       @http.open_timeout = timeout_limit
       @http.read_timeout = timeout_limit
