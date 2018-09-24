@@ -9,8 +9,10 @@ module Unimatrix
       uri   = URI( Unimatrix.configuration.url )
       @http = Net::HTTP.new( uri.host, uri.port )
       
-      @http.open_timeout = 10
-      @http.read_timeout = 10
+      timeout_limit = ENV[ 'TIMEOUT_LIMIT' ] ? ENV[ 'TIMEOUT_LIMIT' ].to_i : 60
+      
+      @http.open_timeout = timeout_limit
+      @http.read_timeout = timeout_limit
 
       @http.use_ssl = ( uri.scheme == 'https' )
       @http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -64,6 +66,12 @@ module Unimatrix
         break unless response.nil? || 
                      ( response.is_a?( Response ) && retry_codes.include?( response.code ) ) || 
                      response.is_a?( Timeout::Error )
+      end
+      
+      if response.is_a?( Timeout::Error )
+        response = Unimatrix::TimeoutError.new(
+          message: response.message
+        )
       end
 
       response
