@@ -3,7 +3,7 @@ module Unimatrix::Alchemist
   class VideoPictureActivityProxy < ActivityProxy
 
     field :timecode
-    feild :picture_uuid
+    field :picture_uuid
 
   end
 
