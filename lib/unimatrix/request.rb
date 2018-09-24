@@ -8,6 +8,9 @@ module Unimatrix
     def initialize( default_parameters = {} )
       uri   = URI( Unimatrix.configuration.url )
       @http = Net::HTTP.new( uri.host, uri.port )
+      
+      @http.open_timeout = 10
+      @http.read_timeout = 10
 
       @http.use_ssl = ( uri.scheme == 'https' )
       @http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -58,12 +61,9 @@ module Unimatrix
             error
           end
 
-        unless response.nil? || ( response.is_a?( Response ) && retry_codes.include?( response.code ) )
-          
-          response = nil if response.is_a?( Timeout::Error )
-          
-          break
-        end
+        break unless response.nil? || 
+                     ( response.is_a?( Response ) && retry_codes.include?( response.code ) ) || 
+                     response.is_a?( Timeout::Error )
       end
 
       response
