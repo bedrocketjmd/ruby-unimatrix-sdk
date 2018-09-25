@@ -13,6 +13,7 @@ module Unimatrix::Quartermaster
 
     field :height
     field :width
+    field :url
 
     has_one :binary_ingressor
 
