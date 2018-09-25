@@ -60,6 +60,8 @@ module Unimatrix
           begin
             yield
           rescue Timeout::Error => error
+            log_error( error.inspect )
+            
             error
           end
 
@@ -88,6 +90,14 @@ module Unimatrix
       addressable.query = parameters.to_param unless parameters.blank?
 
       addressable.to_s
+    end
+    
+    protected; def log_error( message )
+      if defined?( logger.error )
+        logger.error( message )
+      else
+        puts "Error: #{ message }"
+      end
     end
 
   end
