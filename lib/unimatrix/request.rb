@@ -8,6 +8,11 @@ module Unimatrix
     def initialize( default_parameters = {} )
       uri   = URI( Unimatrix.configuration.url )
       @http = Net::HTTP.new( uri.host, uri.port )
+      
+      timeout_limit = ( ENV[ 'TIMEOUT_LIMIT' ] || 60 ).to_i
+      
+      @http.open_timeout = timeout_limit
+      @http.read_timeout = timeout_limit
 
       @http.use_ssl = ( uri.scheme == 'https' )
       @http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -55,15 +60,23 @@ module Unimatrix
           begin
             yield
           rescue Timeout::Error => error
+            log_error( error.inspect )
+            
             error
           end
 
-        unless response.nil? || ( response.is_a?( Response ) && retry_codes.include?( response.code ) )
-          
-          response = nil if response.is_a?( Timeout::Error )
-          
+        unless response.nil? || 
+               ( response.is_a?( Response ) && retry_codes.include?( response.code ) ) || 
+               response.is_a?( Timeout::Error )
+               
           break
         end
+      end
+      
+      if response.is_a?( Timeout::Error )
+        response = Unimatrix::TimeoutError.new(
+          message: response.message
+        )
       end
 
       response
@@ -77,6 +90,14 @@ module Unimatrix
       addressable.query = parameters.to_param unless parameters.blank?
 
       addressable.to_s
+    end
+    
+    protected; def log_error( message )
+      if defined?( logger.error )
+        logger.error( message )
+      else
+        puts "Error: #{ message }"
+      end
     end
 
   end
