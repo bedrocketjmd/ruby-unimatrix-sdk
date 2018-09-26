@@ -55,12 +55,16 @@ module Unimatrix
       response = nil
       Request.new.tap do | request |
         request.get( @path, @parameters ).tap do | response |
-          result = response.resources
-          if block_given?
-            case block.arity
-              when 0; yield
-              when 1; yield result
-              when 2; yield result, response
+          if response.is_a?( Error )
+            result = response
+          else
+            result = response.resources
+            if block_given?
+              case block.arity
+                when 0; yield
+                when 1; yield result
+                when 2; yield result, response
+              end
             end
           end
         end

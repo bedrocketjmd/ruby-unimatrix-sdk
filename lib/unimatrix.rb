@@ -29,6 +29,7 @@ require 'unimatrix/forbidden_error'
 require 'unimatrix/malformed_parameter_error'
 require 'unimatrix/missing_parameter_error'
 require 'unimatrix/not_found_error'
+require 'unimatrix/timeout_error'
 
 # activist
 require 'unimatrix/activist/task'
