@@ -5,7 +5,7 @@ module Unimatrix::Authorization
       result = nil
       Request.new.tap do | request |
         response = request.destroy( @path, @parameters )
-        if response.is_a?( Error ) || response.is_a?( Unimatrix::Error )
+        if response_is_error?( response )
           result = response
         elsif response.present?
           result = response.resources
@@ -19,7 +19,7 @@ module Unimatrix::Authorization
       response = nil
       Request.new.tap do | request |
         request.get( @path, @parameters ).tap do | response |
-          if response.is_a?( Error ) || response.is_a?( Unimatrix::Error )
+          if response_is_error?( response )
             result = response
           else
             result = response.resources
@@ -41,7 +41,7 @@ module Unimatrix::Authorization
       Request.new.tap do | request |
         serializer = Unimatrix::Serializer.new( objects )
         response = request.post( @path, @parameters, serializer.serialize( node ) )
-        if response.is_a?( Error ) || response.is_a?( Unimatrix::Error )
+        if response_is_error?( response )
           result = response
         else
           result = response.resources
@@ -62,6 +62,10 @@ module Unimatrix::Authorization
         @path,
         @parameters.deep_merge( parameters || {} )
       )
+    end
+    
+    protected; def response_is_error?( response )
+      response.is_a?( Error ) || response.is_a?( Unimatrix::Error )
     end
 
   end
