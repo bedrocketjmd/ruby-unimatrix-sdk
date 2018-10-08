@@ -5,7 +5,9 @@ module Unimatrix::Authorization
       result = nil
       Request.new.tap do | request |
         response = request.destroy( @path, @parameters )
-        if response.present?
+        if response.is_a?( Error ) || response.is_a?( Unimatrix::Error )
+          result = response
+        elsif response.present?
           result = response.resources
         end
       end
@@ -17,12 +19,16 @@ module Unimatrix::Authorization
       response = nil
       Request.new.tap do | request |
         request.get( @path, @parameters ).tap do | response |
-          result = response.resources
-          if block_given?
-            case block.arity
-              when 0; yield
-              when 1; yield result
-              when 2; yield result, response
+          if response.is_a?( Error ) || response.is_a?( Unimatrix::Error )
+            result = response
+          else
+            result = response.resources
+            if block_given?
+              case block.arity
+                when 0; yield
+                when 1; yield result
+                when 2; yield result, response
+              end
             end
           end
         end
@@ -35,7 +41,9 @@ module Unimatrix::Authorization
       Request.new.tap do | request |
         serializer = Unimatrix::Serializer.new( objects )
         response = request.post( @path, @parameters, serializer.serialize( node ) )
-        if response.present?
+        if response.is_a?( Error ) || response.is_a?( Unimatrix::Error )
+          result = response
+        else
           result = response.resources
           if block_given?
             case block.arity
