@@ -1,6 +1,5 @@
 require 'net/http'
 require 'addressable/uri'
-require 'pry'
 
 module Unimatrix::Authorization
   class Request < Unimatrix::Request
