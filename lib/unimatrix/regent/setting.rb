@@ -1,6 +1,6 @@
 module Unimatrix::Regent
 
-  class Setting < Unimatrix::Resource
+  class Setting < Unimatrix::DynamicResource
 
     field   :id
     field   :uuid
