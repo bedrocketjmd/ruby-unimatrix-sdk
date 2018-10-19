@@ -116,6 +116,7 @@ require 'unimatrix/iris/stream_transmutator'
 # regent
 require 'unimatrix/regent/realm'
 require 'unimatrix/regent/setting'
+require 'unimatrix/regent/service'
 
 # zephyrus
 require 'unimatrix/zephyrus/input'
