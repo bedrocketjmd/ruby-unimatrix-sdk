@@ -22,7 +22,8 @@ module Unimatrix::Alchemist
     field :audio_bit_rate
     field :audio_sample_rate
     field :transcoder
-  
+    field :file_size
+
   end
 
 end
