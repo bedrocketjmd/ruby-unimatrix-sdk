@@ -10,6 +10,8 @@ module Unimatrix::Zephyrus
     field :uuid
     field :state
     field :input_id
+    field :realm_uuid
+    field :provider
 
     has_many :renditions
     

@@ -10,6 +10,7 @@ module Unimatrix::Iris
     field :minimum_segment_duration
     field :stream_id
     field :stream_uuid
+    field :realm_uuid
 
   end
 

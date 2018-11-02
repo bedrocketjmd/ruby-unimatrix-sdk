@@ -12,6 +12,7 @@ module Unimatrix::Iris
     field :duration_limit
     field :stream_id
     field :stream_uuid
+    field :realm_uuid
 
   end
 
