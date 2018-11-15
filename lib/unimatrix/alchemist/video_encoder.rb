@@ -8,6 +8,7 @@ module Unimatrix::Alchemist
     field :realm_uuid
     field :created_at
     field :updated_at
+    field :clipping_enabled
 
     has_many :rendition_profiles
     has_many :videos
