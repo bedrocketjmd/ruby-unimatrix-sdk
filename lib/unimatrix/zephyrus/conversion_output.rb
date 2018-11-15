@@ -5,7 +5,7 @@ module Unimatrix::Zephyrus
     field :url
     field :url_in
     field :loop
-    
+
   end
-  
+
 end

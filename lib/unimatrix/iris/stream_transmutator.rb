@@ -15,6 +15,7 @@ module Unimatrix::Iris
     field :audio_sample_rate
     field :stream_id
     field :stream_uuid
+    field :realm_uuid
 
   end
 

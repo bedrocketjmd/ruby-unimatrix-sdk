@@ -13,7 +13,8 @@ module Unimatrix::Iris
     field :stream_uuid
     field :authentication_username
     field :authentication_password
-    
+    field :realm_uuid
+
   end
 
 end

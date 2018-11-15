@@ -9,6 +9,8 @@ module Unimatrix::Zephyrus
     field :key
     field :uid
     field :uuid
+    field :realm_uuid
+    field :provider
 
     has_many :outputs
 

@@ -4,7 +4,7 @@ module Unimatrix::Zephyrus
 
     field :profile_idc
     field :level_idc
-    
+
   end
 
 end
