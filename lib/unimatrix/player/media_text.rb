@@ -10,6 +10,7 @@ module Unimatrix::Player
     field :url
     field :content_type
     field :source_type
+    field :language
 
   end
 
