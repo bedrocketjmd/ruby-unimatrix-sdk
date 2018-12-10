@@ -10,6 +10,7 @@ module Unimatrix::Alchemist
     field :language
     field :content_type
     field :content_length
+    field :name
     field :video_id
     field :video_uuid
     field :created_at
