@@ -146,3 +146,6 @@ require 'unimatrix/curator/source'
 # quartermaster
 require 'unimatrix/quartermaster/binary'
 require 'unimatrix/quartermaster/binary_ingressor'
+
+# historian
+require 'unimatrix/historian/history'
