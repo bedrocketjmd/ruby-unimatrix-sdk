@@ -48,8 +48,10 @@ require 'unimatrix/alchemist/aws_rendition_profile'
 require 'unimatrix/alchemist/picture_rendition'
 require 'unimatrix/alchemist/sprite_rendition'
 require 'unimatrix/alchemist/text_rendition'
+require 'unimatrix/alchemist/clipping_rendition'
 require 'unimatrix/alchemist/text_storage_activity_proxy'
 require 'unimatrix/alchemist/video_encoding_activity_proxy'
+require 'unimatrix/alchemist/video_clipping_activity_proxy'
 require 'unimatrix/alchemist/video_picture_activity_proxy'
 require 'unimatrix/alchemist/video_rendition'
 require 'unimatrix/alchemist/video_rendition_interrogation_activity_proxy'
@@ -114,9 +116,15 @@ require 'unimatrix/iris/stream_transcriber'
 require 'unimatrix/iris/stream_transformer'
 require 'unimatrix/iris/stream_transmutator'
 
+# player
+require 'unimatrix/player/media'
+require 'unimatrix/player/media_source'
+require 'unimatrix/player/media_text'
+
 # regent
 require 'unimatrix/regent/realm'
 require 'unimatrix/regent/setting'
+require 'unimatrix/regent/service'
 
 # zephyrus
 require 'unimatrix/zephyrus/input'
@@ -138,3 +146,6 @@ require 'unimatrix/curator/source'
 # quartermaster
 require 'unimatrix/quartermaster/binary'
 require 'unimatrix/quartermaster/binary_ingressor'
+
+# historian
+require 'unimatrix/historian/history'

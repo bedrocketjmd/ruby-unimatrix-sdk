@@ -11,7 +11,8 @@ module Unimatrix::Iris
     field :region
     field :stream_id
     field :stream_uuid
-    
+    field :realm_uuid
+
   end
 
 end

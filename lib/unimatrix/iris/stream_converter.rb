@@ -12,7 +12,8 @@ module Unimatrix::Iris
     field :loop
     field :stream_id
     field :stream_uuid
-    
+    field :realm_uuid
+
   end
 
 end

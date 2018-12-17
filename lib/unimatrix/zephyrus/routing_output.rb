@@ -5,7 +5,7 @@ module Unimatrix::Zephyrus
     field :url
     field :authentication_username
     field :authentication_password
-    
+
   end
 
 end
